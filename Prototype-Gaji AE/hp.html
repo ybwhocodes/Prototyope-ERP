@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hot Prospect | Progress | Closing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        /* Custom scrollbar globally for any scrollable elements */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+        
+        /* Subtle row hover for tables */
+        .data-table tbody tr:hover {
+            background-color: #f1f5f9;
+        }
+    </style>
+</head>
+<body class="flex flex-col h-screen text-slate-800 text-sm overflow-hidden bg-white">
+
+    <!-- Navbar -->
+    <header class="bg-[#1e293b] text-white flex items-center justify-between px-4 py-2 shrink-0 border-b-2 border-yellow-500 shadow-sm z-20">
+        <div class="flex items-center space-x-2">
+            <span class="font-bold text-lg text-yellow-500">GriyaNet</span>
+            <span class="text-sm font-semibold">- Hei, Admin</span>
+        </div>
+
+        <div class="flex items-center space-x-4">
+            <span class="text-[10px] font-semibold text-yellow-500 tracking-wider">MODE DEVELOPMENT - Admin</span>
+            
+            <div class="flex space-x-1">
+                <button class="bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs font-medium transition-colors">HRBP</button>
+                <button class="bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs font-medium transition-colors">Sales</button>
+                <button class="bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs font-medium transition-colors">Access</button>
+                <button class="bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs font-medium transition-colors">Frontline Lead</button>
+                <button class="bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs font-medium transition-colors">Planner & Warehouse</button>
+            </div>
+            
+            <button class="flex items-center space-x-1 border border-slate-500 hover:bg-slate-700 px-3 py-1 rounded text-xs transition-colors ml-4">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="flex flex-1 overflow-hidden">
+        
+        <!-- Sidebar -->
+        <aside class="w-64 bg-[#f8fafc] border-r border-slate-200 flex flex-col shrink-0 overflow-y-auto hidden md:flex">
+            <div class="py-4">
+                
+                <div class="mb-4">
+                    <ul class="space-y-0.5">
+                        <li>
+                            <a href="dashboard.html" class="flex items-center px-6 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors border-l-4 border-transparent">
+                                <i class="fas fa-home w-5 text-center text-slate-400 mr-2 text-[10px]"></i>
+                                <span class="text-xs">Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center px-6 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors border-l-4 border-transparent">
+                                <i class="fas fa-chart-line w-5 text-center text-slate-400 mr-2 text-[10px]"></i>
+                                <span class="text-xs">Performance</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center px-6 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors border-l-4 border-transparent">
+                                <i class="fas fa-tools w-5 text-center text-slate-400 mr-2 text-[10px]"></i>
+                                <span class="text-xs">Dismantle Performance</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- ALL PROCESSES -->
+                <div class="mb-4">
+                    <h3 class="px-6 text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1 mt-2">ALL PROCESSES</h3>
+                    <ul class="space-y-0.5">
+                        <li>
+                            <a href="dashboard.html" class="flex items-center px-6 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors border-l-4 border-transparent">
+                                <i class="far fa-snowflake w-5 text-center text-slate-400 mr-2 text-[10px]"></i>
+                                <span class="text-xs">Cold Prospect</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="hp.html" class="flex items-center px-6 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors border-l-4 border-transparent">
+                                <i class="fas fa-fire w-5 text-center text-slate-400 mr-2 text-[10px]"></i>
+                                <span class="text-xs">Hot Prospect</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center px-6 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors border-l-4 border-transparent">
+                                <i class="fas fa-spinner w-5 text-center text-slate-400 mr-2 text-[10px]"></i>
+                                <span class="text-xs">Progress</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- RESUME -->
+                <div class="mb-4">
+                    <h3 class="px-6 text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1 mt-2">RESUME</h3>
+                    <ul class="space-y-0.5">
+                        <li>
+                            <!-- Active Menu Item -->
+                            <a href="hp.html" class="flex items-center px-6 py-2 bg-blue-50 text-blue-700 border-l-4 border-blue-500 font-medium transition-colors">
+                                <i class="far fa-file-alt w-5 text-center text-blue-500 mr-2 text-[10px]"></i>
+                                <span class="text-xs">Hp | Progress | Closing</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- MAPS -->
+                <div class="mb-4">
+                    <h3 class="px-6 text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1 mt-2">MAPS</h3>
+                    <ul class="space-y-0.5">
+                        <li>
+                            <a href="#" class="flex items-center px-6 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors border-l-4 border-transparent">
+                                <i class="fas fa-map-marker-alt w-5 text-center text-slate-400 mr-2 text-[10px]"></i>
+                                <span class="text-xs">Customers By Area</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center px-6 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors border-l-4 border-transparent">
+                                <i class="far fa-dot-circle w-5 text-center text-slate-400 mr-2 text-[10px]"></i>
+                                <span class="text-xs">Closing vs CP</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- LOST CP -->
+                <div class="mb-4">
+                    <h3 class="px-6 text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1 mt-2">LOST CP</h3>
+                    <ul class="space-y-0.5">
+                        <li>
+                            <a href="#" class="flex items-center px-6 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors border-l-4 border-transparent">
+                                <i class="fas fa-times w-5 text-center text-slate-400 mr-2 text-[10px]"></i>
+                                <span class="text-xs">Lost CP</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center px-6 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors border-l-4 border-transparent">
+                                <i class="far fa-times-circle w-5 text-center text-slate-400 mr-2 text-[10px]"></i>
+                                <span class="text-xs">Lost CP by System</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </aside>
+
+        <!-- Content Area -->
+        <main class="flex-1 flex flex-col p-8 bg-white overflow-y-auto main-content-scroll">
+            
+            <h1 class="text-xl font-bold text-slate-800 border-b pb-3 mb-4">Hot Prospect | Progress | Closing</h1>
+            
+            <!-- Controls Form -->
+            <div class="flex items-center space-x-3 mb-6 border-b border-slate-100 pb-4">
+                <select class="border border-slate-300 rounded px-3 py-1.5 text-xs text-slate-700 bg-white focus:outline-none focus:border-blue-500 w-40">
+                    <option>August 2026</option>
+                    <option>July 2026</option>
+                    <option>June 2026</option>
+                </select>
+                
+                <select class="border border-slate-300 rounded px-3 py-1.5 text-xs text-slate-700 bg-white focus:outline-none focus:border-blue-500 w-40">
+                    <option>All Branches</option>
+                    <option>Tumpang</option>
+                    <option>Dau</option>
+                    <option>Bumiaji</option>
+                </select>
+                
+                <button class="bg-[#16a34a] hover:bg-green-700 text-white px-4 py-1.5 rounded text-xs font-semibold transition-colors">
+                    Export CSV
+                </button>
+            </div>
+
+            <!-- Table 1: Sales Card -->
+            <div class="border border-slate-200 rounded-lg overflow-hidden mb-8 shadow-sm">
+                <!-- Card Header -->
+                <div class="bg-slate-500 text-white px-4 py-2 text-sm font-semibold">
+                    Hot Prospect / Closing Sales
+                </div>
+                
+                <!-- Table -->
+                <div class="overflow-x-auto overflow-y-auto max-h-[350px]">
+                    <table class="w-full table-fixed text-left text-xs data-table min-w-[800px]">
+                        <thead class="text-slate-800 border-b border-slate-200 bg-white">
+                            <tr>
+                                <th class="py-2.5 px-3 font-semibold text-center w-[5%]">#</th>
+                                <th class="py-2.5 px-3 font-semibold w-[15%]">Branch</th>
+                                <th class="py-2.5 px-3 font-semibold w-[25%]">Name</th>
+                                <th class="py-2.5 px-3 font-semibold text-center w-[10%]">Input</th>
+                                <th class="py-2.5 px-3 font-semibold text-center w-[10%]">Progress</th>
+                                <th class="py-2.5 px-3 font-semibold text-center w-[10%]">Closing</th>
+                                <th class="py-2.5 px-3 font-semibold text-center w-[15%]">Cashback</th>
+                                <th class="py-2.5 px-3 font-semibold text-center w-[10%]">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-600 divide-y divide-slate-100">
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">1</td>
+                                <td class="py-1.5 px-3">Tumpang</td>
+                                <td class="py-1.5 px-3">Adil</td>
+                                <td class="py-1.5 px-3 text-center">1</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">2</td>
+                                <td class="py-1.5 px-3">Tumpang</td>
+                                <td class="py-1.5 px-3">Eko</td>
+                                <td class="py-1.5 px-3 text-center">3</td>
+                                <td class="py-1.5 px-3 text-center">12</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">3</td>
+                                <td class="py-1.5 px-3">Tumpang</td>
+                                <td class="py-1.5 px-3">Idam</td>
+                                <td class="py-1.5 px-3 text-center">1</td>
+                                <td class="py-1.5 px-3 text-center">4</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                             <tr>
+                                <td class="py-1.5 px-3 text-center">4</td>
+                                <td class="py-1.5 px-3">Tumpang</td>
+                                <td class="py-1.5 px-3">Oki</td>
+                                <td class="py-1.5 px-3 text-center">2</td>
+                                <td class="py-1.5 px-3 text-center">8</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">5</td>
+                                <td class="py-1.5 px-3">Tumpang</td>
+                                <td class="py-1.5 px-3">Rendi</td>
+                                <td class="py-1.5 px-3 text-center">10</td>
+                                <td class="py-1.5 px-3 text-center">12</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">6</td>
+                                <td class="py-1.5 px-3">Tumpang</td>
+                                <td class="py-1.5 px-3">Windu</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">7</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">7</td>
+                                <td class="py-1.5 px-3">Bumiaji</td>
+                                <td class="py-1.5 px-3">Alfan</td>
+                                <td class="py-1.5 px-3 text-center">2</td>
+                                <td class="py-1.5 px-3 text-center">2</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">8</td>
+                                <td class="py-1.5 px-3">Bumiaji</td>
+                                <td class="py-1.5 px-3">Dio</td>
+                                <td class="py-1.5 px-3 text-center">2</td>
+                                <td class="py-1.5 px-3 text-center">8</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                             <tr>
+                                <td class="py-1.5 px-3 text-center">9</td>
+                                <td class="py-1.5 px-3">Bumiaji</td>
+                                <td class="py-1.5 px-3">Hendrik</td>
+                                <td class="py-1.5 px-3 text-center">1</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                             <tr>
+                                <td class="py-1.5 px-3 text-center">10</td>
+                                <td class="py-1.5 px-3">Bumiaji</td>
+                                <td class="py-1.5 px-3">Mukhlis</td>
+                                <td class="py-1.5 px-3 text-center">1</td>
+                                <td class="py-1.5 px-3 text-center">8</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">11</td>
+                                <td class="py-1.5 px-3">Bumiaji</td>
+                                <td class="py-1.5 px-3">Nazel</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">4</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">12</td>
+                                <td class="py-1.5 px-3">Bumiaji</td>
+                                <td class="py-1.5 px-3">Rendi</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">13</td>
+                                <td class="py-1.5 px-3">Bumiaji</td>
+                                <td class="py-1.5 px-3">Sholeh</td>
+                                <td class="py-1.5 px-3 text-center">1</td>
+                                <td class="py-1.5 px-3 text-center">1</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">14</td>
+                                <td class="py-1.5 px-3">Dau</td>
+                                <td class="py-1.5 px-3">Andhika</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">2</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">15</td>
+                                <td class="py-1.5 px-3">Dau</td>
+                                <td class="py-1.5 px-3">Bambang</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">4</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">16</td>
+                                <td class="py-1.5 px-3">Dau</td>
+                                <td class="py-1.5 px-3">Dimas</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">3</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                             <tr>
+                                <td class="py-1.5 px-3 text-center">17</td>
+                                <td class="py-1.5 px-3">Dau</td>
+                                <td class="py-1.5 px-3">Jafar</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">3</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                             <tr>
+                                <td class="py-1.5 px-3 text-center">18</td>
+                                <td class="py-1.5 px-3">Dau</td>
+                                <td class="py-1.5 px-3">Rian</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">1</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">19</td>
+                                <td class="py-1.5 px-3">Dau</td>
+                                <td class="py-1.5 px-3">Samsul</td>
+                                <td class="py-1.5 px-3 text-center">2</td>
+                                <td class="py-1.5 px-3 text-center">3</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">20</td>
+                                <td class="py-1.5 px-3">Dau</td>
+                                <td class="py-1.5 px-3">Yohanes</td>
+                                <td class="py-1.5 px-3 text-center">1</td>
+                                <td class="py-1.5 px-3 text-center">2</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">21</td>
+                                <td class="py-1.5 px-3">Pakis</td>
+                                <td class="py-1.5 px-3">Eko</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">22</td>
+                                <td class="py-1.5 px-3">Pakis</td>
+                                <td class="py-1.5 px-3">Firman</td>
+                                <td class="py-1.5 px-3 text-center">4</td>
+                                <td class="py-1.5 px-3 text-center">2</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">23</td>
+                                <td class="py-1.5 px-3">Pakis</td>
+                                <td class="py-1.5 px-3">Hari</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">1</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                             <tr>
+                                <td class="py-1.5 px-3 text-center">24</td>
+                                <td class="py-1.5 px-3">Pakis</td>
+                                <td class="py-1.5 px-3">Mumu</td>
+                                <td class="py-1.5 px-3 text-center">2</td>
+                                <td class="py-1.5 px-3 text-center">3</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                             <tr>
+                                <td class="py-1.5 px-3 text-center">25</td>
+                                <td class="py-1.5 px-3">Pakis</td>
+                                <td class="py-1.5 px-3">Rifqy</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">26</td>
+                                <td class="py-1.5 px-3">Pakis</td>
+                                <td class="py-1.5 px-3">Sandi</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                        </tbody>
+                        <tfoot class="bg-slate-100 text-slate-800 font-bold border-t border-slate-300 sticky bottom-0 z-10 shadow-sm">
+                            <tr>
+                                <td class="py-2 px-3 text-center"></td>
+                                <td class="py-2 px-3">Total</td>
+                                <td class="py-2 px-3"></td>
+                                <td class="py-2 px-3 text-center">33</td>
+                                <td class="py-2 px-3 text-center">90</td>
+                                <td class="py-2 px-3 text-center">0</td>
+                                <td class="py-2 px-3 text-center">0</td>
+                                <td class="py-2 px-3 text-center"></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Table 2: Admin Card -->
+            <div class="border border-slate-200 rounded-lg overflow-hidden shadow-sm">
+                <!-- Card Header -->
+                <div class="bg-slate-500 text-white px-4 py-2 text-sm font-semibold">
+                    Hot Prospect / Closing Admin
+                </div>
+                
+                <!-- Table -->
+                <div class="overflow-x-auto overflow-y-auto max-h-[350px]">
+                    <table class="w-full table-fixed text-left text-xs data-table min-w-[800px]">
+                        <thead class="text-slate-800 border-b border-slate-200 bg-white">
+                            <tr>
+                                <th class="py-2.5 px-3 font-semibold text-center w-[5%]">#</th>
+                                <th class="py-2.5 px-3 font-semibold w-[15%]">Branch</th>
+                                <th class="py-2.5 px-3 font-semibold w-[25%]">Name</th>
+                                <th class="py-2.5 px-3 font-semibold text-center w-[10%]">Input</th>
+                                <th class="py-2.5 px-3 font-semibold text-center w-[10%]">Progress</th>
+                                <th class="py-2.5 px-3 font-semibold text-center w-[10%]">Closing</th>
+                                <th class="py-2.5 px-3 font-semibold text-center w-[15%]">Cashback</th>
+                                <th class="py-2.5 px-3 font-semibold text-center w-[10%]">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-600 divide-y divide-slate-100">
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">1</td>
+                                <td class="py-1.5 px-3">Tumpang</td>
+                                <td class="py-1.5 px-3">Adi</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">2</td>
+                                <td class="py-1.5 px-3">Tumpang</td>
+                                <td class="py-1.5 px-3">Eko</td>
+                                <td class="py-1.5 px-3 text-center">1</td>
+                                <td class="py-1.5 px-3 text-center">1</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">3</td>
+                                <td class="py-1.5 px-3">Tumpang</td>
+                                <td class="py-1.5 px-3">Idam</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">1</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                             <tr>
+                                <td class="py-1.5 px-3 text-center">4</td>
+                                <td class="py-1.5 px-3">Tumpang</td>
+                                <td class="py-1.5 px-3">Oki</td>
+                                <td class="py-1.5 px-3 text-center">3</td>
+                                <td class="py-1.5 px-3 text-center">3</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">5</td>
+                                <td class="py-1.5 px-3">Tumpang</td>
+                                <td class="py-1.5 px-3">Rendi</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">2</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">6</td>
+                                <td class="py-1.5 px-3">Tumpang</td>
+                                <td class="py-1.5 px-3">Windu</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">2</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">7</td>
+                                <td class="py-1.5 px-3">Bumiaji</td>
+                                <td class="py-1.5 px-3">Anton</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">8</td>
+                                <td class="py-1.5 px-3">Bumiaji</td>
+                                <td class="py-1.5 px-3">Amir</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                             <tr>
+                                <td class="py-1.5 px-3 text-center">9</td>
+                                <td class="py-1.5 px-3">Bumiaji</td>
+                                <td class="py-1.5 px-3">Hendrik</td>
+                                <td class="py-1.5 px-3 text-center">1</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                             <tr>
+                                <td class="py-1.5 px-3 text-center">10</td>
+                                <td class="py-1.5 px-3">Bumiaji</td>
+                                <td class="py-1.5 px-3">Mukhlis</td>
+                                <td class="py-1.5 px-3 text-center">1</td>
+                                <td class="py-1.5 px-3 text-center">1</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">11</td>
+                                <td class="py-1.5 px-3">Bumiaji</td>
+                                <td class="py-1.5 px-3">Nazel</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">12</td>
+                                <td class="py-1.5 px-3">Bumiaji</td>
+                                <td class="py-1.5 px-3">Rendi</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">13</td>
+                                <td class="py-1.5 px-3">Bumiaji</td>
+                                <td class="py-1.5 px-3">Sholeh</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">14</td>
+                                <td class="py-1.5 px-3">Dau</td>
+                                <td class="py-1.5 px-3">Andhika</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">15</td>
+                                <td class="py-1.5 px-3">Dau</td>
+                                <td class="py-1.5 px-3">Dimas</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">16</td>
+                                <td class="py-1.5 px-3">Dau</td>
+                                <td class="py-1.5 px-3">Jafar</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                             <tr>
+                                <td class="py-1.5 px-3 text-center">17</td>
+                                <td class="py-1.5 px-3">Dau</td>
+                                <td class="py-1.5 px-3">Lala</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                             <tr>
+                                <td class="py-1.5 px-3 text-center">18</td>
+                                <td class="py-1.5 px-3">Dau</td>
+                                <td class="py-1.5 px-3">Rian</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">1</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">19</td>
+                                <td class="py-1.5 px-3">Dau</td>
+                                <td class="py-1.5 px-3">Yohanes</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">20</td>
+                                <td class="py-1.5 px-3">Pakis</td>
+                                <td class="py-1.5 px-3">Bowo</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">21</td>
+                                <td class="py-1.5 px-3">Pakis</td>
+                                <td class="py-1.5 px-3">Firman</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">22</td>
+                                <td class="py-1.5 px-3">Pakis</td>
+                                <td class="py-1.5 px-3">Hari</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                             <tr>
+                                <td class="py-1.5 px-3 text-center">23</td>
+                                <td class="py-1.5 px-3">Pakis</td>
+                                <td class="py-1.5 px-3">Mumu</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                             <tr>
+                                <td class="py-1.5 px-3 text-center">24</td>
+                                <td class="py-1.5 px-3">Pakis</td>
+                                <td class="py-1.5 px-3">Rifqy</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1.5 px-3 text-center">25</td>
+                                <td class="py-1.5 px-3">Pakis</td>
+                                <td class="py-1.5 px-3">Sandi</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center">0</td>
+                                <td class="py-1.5 px-3 text-center"><a href="detail-gaji-ae.html" class="inline-block"><button class="bg-[#facc15] hover:bg-yellow-500 text-slate-800 px-2 py-0.5 rounded text-[10px]"><i class="fas fa-chevron-right"></i></button></a></td>
+                            </tr>
+                        </tbody>
+                        <tfoot class="bg-slate-100 text-slate-800 font-bold border-t border-slate-300 sticky bottom-0 z-10 shadow-sm">
+                            <tr>
+                                <td class="py-2 px-3 text-center"></td>
+                                <td class="py-2 px-3">Total</td>
+                                <td class="py-2 px-3"></td>
+                                <td class="py-2 px-3 text-center">6</td>
+                                <td class="py-2 px-3 text-center">11</td>
+                                <td class="py-2 px-3 text-center">0</td>
+                                <td class="py-2 px-3 text-center">0</td>
+                                <td class="py-2 px-3 text-center"></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+</body>
+</html>

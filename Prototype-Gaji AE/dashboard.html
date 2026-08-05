@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input hari ini, Cold Prospect</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        .main-content-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+        .main-content-scroll::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        .main-content-scroll::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        .main-content-scroll::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+
+        /* Zebra striping for simple tables */
+        .zebra-table tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+    </style>
+</head>
+<body class="flex flex-col h-screen text-slate-800 text-sm overflow-hidden bg-white">
+
+    <!-- Navbar -->
+    <header class="bg-[#1e293b] text-white flex items-center justify-between px-4 py-2 shrink-0 border-b-2 border-yellow-500 shadow-sm z-20">
+        <div class="flex items-center space-x-2">
+            <span class="font-bold text-lg text-yellow-500">GriyaNet</span>
+            <span class="text-sm font-semibold">- Hei, Admin</span>
+        </div>
+
+        <div class="flex items-center space-x-4">
+            <span class="text-xs font-semibold text-yellow-500 tracking-wider">MODE DEVELOPMENT - Admin</span>
+            
+            <div class="flex space-x-1">
+                <button class="bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs font-medium transition-colors">HRP</button>
+                <button class="bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs font-medium transition-colors">Sales</button>
+                <button class="bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs font-medium transition-colors">Access</button>
+                <button class="bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs font-medium transition-colors">Frontline Lead</button>
+                <button class="bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs font-medium transition-colors">Planner & Warehouse</button>
+            </div>
+            
+            <button class="flex items-center space-x-1 border border-slate-500 hover:bg-slate-700 px-3 py-1 rounded text-xs transition-colors ml-4">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="flex flex-1 overflow-hidden">
+        
+        <!-- Sidebar -->
+        <aside class="w-64 bg-[#f8fafc] border-r border-slate-200 flex flex-col shrink-0 overflow-y-auto hidden md:flex">
+            <div class="py-4">
+                
+                <div class="mb-4">
+                    <ul class="space-y-0.5">
+                        <li>
+                            <a href="dashboard.html" class="flex items-center px-6 py-2 bg-blue-50 text-blue-700 border-l-4 border-blue-500 font-medium transition-colors">
+                                <i class="fas fa-home w-5 text-center text-blue-500 mr-2 text-[10px]"></i>
+                                <span class="text-xs">Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center px-6 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors border-l-4 border-transparent">
+                                <i class="fas fa-chart-line w-5 text-center text-slate-400 mr-2 text-[10px]"></i>
+                                <span class="text-xs">Performance</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center px-6 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors border-l-4 border-transparent">
+                                <i class="fas fa-tools w-5 text-center text-slate-400 mr-2 text-[10px]"></i>
+                                <span class="text-xs">Dismantle Performance</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- ALL PROCESSES -->
+                <div class="mb-4">
+                    <h3 class="px-6 text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1 mt-2">ALL PROCESSES</h3>
+                    <ul class="space-y-0.5">
+                        <li>
+                            <a href="dashboard.html" class="flex items-center px-6 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors border-l-4 border-transparent">
+                                <i class="far fa-snowflake w-5 text-center text-slate-400 mr-2 text-[10px]"></i>
+                                <span class="text-xs">Cold Prospect</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="hp.html" class="flex items-center px-6 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors border-l-4 border-transparent">
+                                <i class="fas fa-fire w-5 text-center text-slate-400 mr-2 text-[10px]"></i>
+                                <span class="text-xs">Hot Prospect</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center px-6 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors border-l-4 border-transparent">
+                                <i class="fas fa-spinner w-5 text-center text-slate-400 mr-2 text-[10px]"></i>
+                                <span class="text-xs">Progress</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- RESUME -->
+                <div class="mb-4">
+                    <h3 class="px-6 text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1 mt-2">RESUME</h3>
+                    <ul class="space-y-0.5">
+                        <li>
+                            <a href="hp.html" class="flex items-center px-6 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors border-l-4 border-transparent">
+                                <i class="far fa-file-alt w-5 text-center text-slate-400 mr-2 text-[10px]"></i>
+                                <span class="text-xs">Hp | Progress | Closing</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- MAPS -->
+                <div class="mb-4">
+                    <h3 class="px-6 text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1 mt-2">MAPS</h3>
+                    <ul class="space-y-0.5">
+                        <li>
+                            <a href="#" class="flex items-center px-6 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors border-l-4 border-transparent">
+                                <i class="fas fa-map-marker-alt w-5 text-center text-slate-400 mr-2 text-[10px]"></i>
+                                <span class="text-xs">Customers By Area</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center px-6 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors border-l-4 border-transparent">
+                                <i class="far fa-dot-circle w-5 text-center text-slate-400 mr-2 text-[10px]"></i>
+                                <span class="text-xs">Closing vs CP</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- LOST CP -->
+                <div class="mb-4">
+                    <h3 class="px-6 text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1 mt-2">LOST CP</h3>
+                    <ul class="space-y-0.5">
+                        <li>
+                            <a href="#" class="flex items-center px-6 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors border-l-4 border-transparent">
+                                <i class="fas fa-times w-5 text-center text-slate-400 mr-2 text-[10px]"></i>
+                                <span class="text-xs">Lost CP</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center px-6 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors border-l-4 border-transparent">
+                                <i class="far fa-times-circle w-5 text-center text-slate-400 mr-2 text-[10px]"></i>
+                                <span class="text-xs">Lost CP by System</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </aside>
+
+        <!-- Content Area -->
+        <main class="flex-1 flex flex-col p-8 bg-white overflow-y-auto main-content-scroll">
+            
+            <h1 class="text-xl font-semibold text-slate-800 mb-8 border-b pb-3">Input hari ini, Cold Prospect</h1>
+            
+            <!-- Tables Container (Grid) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+                
+                <!-- Branch: Tumpang -->
+                <div class="bg-white border border-slate-200 rounded p-5 flex flex-col justify-between">
+                    <div>
+                        <h2 class="font-semibold text-sm mb-2 text-slate-800">Branch: Tumpang</h2>
+                        <table class="w-full text-left text-xs border-t border-b border-slate-200 zebra-table">
+                            <thead>
+                                <tr class="border-b border-slate-300">
+                                    <th class="py-1.5 px-2 font-semibold w-10">#</th>
+                                    <th class="py-1.5 px-2 font-semibold">Nama</th>
+                                    <th class="py-1.5 px-2 font-semibold text-right w-24">Total Input</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-slate-600">
+                                <tr><td class="py-1 px-2">1</td><td class="py-1 px-2">Eko</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">2</td><td class="py-1 px-2">Karno</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">3</td><td class="py-1 px-2">Noval</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">4</td><td class="py-1 px-2">Rendi</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">5</td><td class="py-1 px-2">Sari</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">6</td><td class="py-1 px-2">Udin</td><td class="py-1 px-2 text-right">0</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Branch: Dau -->
+                <div class="bg-white border border-slate-200 rounded p-5 flex flex-col justify-between">
+                    <div>
+                        <h2 class="font-semibold text-sm mb-2 text-slate-800">Branch: Dau</h2>
+                        <table class="w-full text-left text-xs border-t border-b border-slate-200 zebra-table">
+                            <thead>
+                                <tr class="border-b border-slate-300">
+                                    <th class="py-1.5 px-2 font-semibold w-10">#</th>
+                                    <th class="py-1.5 px-2 font-semibold">Nama</th>
+                                    <th class="py-1.5 px-2 font-semibold text-right w-24">Total Input</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-slate-600">
+                                <tr><td class="py-1 px-2">1</td><td class="py-1 px-2">Chintya</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">2</td><td class="py-1 px-2">Devita</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">3</td><td class="py-1 px-2">Helmy</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">4</td><td class="py-1 px-2">Husnul</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">5</td><td class="py-1 px-2">Laras</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">6</td><td class="py-1 px-2">Samsul</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">7</td><td class="py-1 px-2">Yuda</td><td class="py-1 px-2 text-right">0</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Branch: Bumiaji -->
+                <div class="bg-white border border-slate-200 rounded p-5 flex flex-col justify-between">
+                    <div>
+                        <h2 class="font-semibold text-sm mb-2 text-slate-800">Branch: Bumiaji</h2>
+                        <table class="w-full text-left text-xs border-t border-b border-slate-200 zebra-table">
+                            <thead>
+                                <tr class="border-b border-slate-300">
+                                    <th class="py-1.5 px-2 font-semibold w-10">#</th>
+                                    <th class="py-1.5 px-2 font-semibold">Nama</th>
+                                    <th class="py-1.5 px-2 font-semibold text-right w-24">Total Input</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-slate-600">
+                                <tr><td class="py-1 px-2">1</td><td class="py-1 px-2">Agung</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">2</td><td class="py-1 px-2">Anissa</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">3</td><td class="py-1 px-2">Budi</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">4</td><td class="py-1 px-2">Dianita</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">5</td><td class="py-1 px-2">Maman</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">6</td><td class="py-1 px-2">Riana</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">7</td><td class="py-1 px-2">Siska</td><td class="py-1 px-2 text-right">0</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Branch: Blimbing -->
+                <div class="bg-white border border-slate-200 rounded p-5 flex flex-col justify-between">
+                    <div>
+                        <h2 class="font-semibold text-sm mb-2 text-slate-800">Branch: Blimbing</h2>
+                        <table class="w-full text-left text-xs border-t border-b border-slate-200 zebra-table">
+                            <thead>
+                                <tr class="border-b border-slate-300">
+                                    <th class="py-1.5 px-2 font-semibold w-10">#</th>
+                                    <th class="py-1.5 px-2 font-semibold">Nama</th>
+                                    <th class="py-1.5 px-2 font-semibold text-right w-24">Total Input</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-slate-600">
+                                <tr><td class="py-1 px-2">1</td><td class="py-1 px-2">Ayu</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">2</td><td class="py-1 px-2">Bambang</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">3</td><td class="py-1 px-2">Dodi</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">4</td><td class="py-1 px-2">Fahmi</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">5</td><td class="py-1 px-2">Ika</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">6</td><td class="py-1 px-2">Lukman</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">7</td><td class="py-1 px-2">Rizal</td><td class="py-1 px-2 text-right">0</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Branch: Pakis -->
+                <div class="bg-white border border-slate-200 rounded p-5 flex flex-col justify-between">
+                    <div>
+                        <h2 class="font-semibold text-sm mb-2 text-slate-800">Branch: Pakis</h2>
+                        <table class="w-full text-left text-xs border-t border-b border-slate-200 zebra-table">
+                            <thead>
+                                <tr class="border-b border-slate-300">
+                                    <th class="py-1.5 px-2 font-semibold w-10">#</th>
+                                    <th class="py-1.5 px-2 font-semibold">Nama</th>
+                                    <th class="py-1.5 px-2 font-semibold text-right w-24">Total Input</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-slate-600">
+                                <tr><td class="py-1 px-2">1</td><td class="py-1 px-2">Amelia</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">2</td><td class="py-1 px-2">Faris</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">3</td><td class="py-1 px-2">Hana</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">4</td><td class="py-1 px-2">Imran</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">5</td><td class="py-1 px-2">Mila</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">6</td><td class="py-1 px-2">Rian</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">7</td><td class="py-1 px-2">Tegar</td><td class="py-1 px-2 text-right">0</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                 <!-- Branch: Pasuruan Selatan -->
+                <div class="bg-white border border-slate-200 rounded p-5 flex flex-col justify-between">
+                    <div>
+                        <h2 class="font-semibold text-sm mb-2 text-slate-800">Branch: Pasuruan Selatan</h2>
+                        <table class="w-full text-left text-xs border-t border-b border-slate-200 zebra-table">
+                            <thead>
+                                <tr class="border-b border-slate-300">
+                                    <th class="py-1.5 px-2 font-semibold w-10">#</th>
+                                    <th class="py-1.5 px-2 font-semibold">Nama</th>
+                                    <th class="py-1.5 px-2 font-semibold text-right w-24">Total Input</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-slate-600">
+                                <tr><td class="py-1 px-2">1</td><td class="py-1 px-2">Ari</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">2</td><td class="py-1 px-2">Bowo</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">3</td><td class="py-1 px-2">Joni</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">4</td><td class="py-1 px-2">Rani</td><td class="py-1 px-2 text-right">0</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Branch: Karangploso -->
+                <div class="bg-white border border-slate-200 rounded p-5 flex flex-col justify-between">
+                    <div>
+                        <h2 class="font-semibold text-sm mb-2 text-slate-800">Branch: Karangploso</h2>
+                        <table class="w-full text-left text-xs border-t border-b border-slate-200 zebra-table">
+                            <thead>
+                                <tr class="border-b border-slate-300">
+                                    <th class="py-1.5 px-2 font-semibold w-10">#</th>
+                                    <th class="py-1.5 px-2 font-semibold">Nama</th>
+                                    <th class="py-1.5 px-2 font-semibold text-right w-24">Total Input</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-slate-600">
+                                <tr><td class="py-1 px-2">1</td><td class="py-1 px-2">Bayu</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">2</td><td class="py-1 px-2">Dina</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">3</td><td class="py-1 px-2">Hendra</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">4</td><td class="py-1 px-2">Oktav</td><td class="py-1 px-2 text-right">0</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Branch: Pasuruan Utara -->
+                <div class="bg-white border border-slate-200 rounded p-5 flex flex-col justify-between">
+                    <div>
+                        <h2 class="font-semibold text-sm mb-2 text-slate-800">Branch: Pasuruan Utara</h2>
+                        <table class="w-full text-left text-xs border-t border-b border-slate-200 zebra-table">
+                            <thead>
+                                <tr class="border-b border-slate-300">
+                                    <th class="py-1.5 px-2 font-semibold w-10">#</th>
+                                    <th class="py-1.5 px-2 font-semibold">Nama</th>
+                                    <th class="py-1.5 px-2 font-semibold text-right w-24">Total Input</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-slate-600">
+                                <tr><td class="py-1 px-2">1</td><td class="py-1 px-2">Galih</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">2</td><td class="py-1 px-2">Hari</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">3</td><td class="py-1 px-2">Iqbal</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">4</td><td class="py-1 px-2">Mindy</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">5</td><td class="py-1 px-2">Tio</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">6</td><td class="py-1 px-2">Yogi</td><td class="py-1 px-2 text-right">0</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Branch: Wendit -->
+                <div class="bg-white border border-slate-200 rounded p-5 flex flex-col justify-between">
+                    <div>
+                        <h2 class="font-semibold text-sm mb-2 text-slate-800">Branch: Wendit</h2>
+                        <table class="w-full text-left text-xs border-t border-b border-slate-200 zebra-table">
+                            <thead>
+                                <tr class="border-b border-slate-300">
+                                    <th class="py-1.5 px-2 font-semibold w-10">#</th>
+                                    <th class="py-1.5 px-2 font-semibold">Nama</th>
+                                    <th class="py-1.5 px-2 font-semibold text-right w-24">Total Input</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-slate-600">
+                                <tr><td class="py-1 px-2">1</td><td class="py-1 px-2">Dimas</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">2</td><td class="py-1 px-2">Fajar</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">3</td><td class="py-1 px-2">Reza</td><td class="py-1 px-2 text-right">0</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                 <!-- Branch: Sawojajar -->
+                <div class="bg-white border border-slate-200 rounded p-5 flex flex-col justify-between">
+                    <div>
+                        <h2 class="font-semibold text-sm mb-2 text-slate-800">Branch: Sawojajar</h2>
+                        <table class="w-full text-left text-xs border-t border-b border-slate-200 zebra-table">
+                            <thead>
+                                <tr class="border-b border-slate-300">
+                                    <th class="py-1.5 px-2 font-semibold w-10">#</th>
+                                    <th class="py-1.5 px-2 font-semibold">Nama</th>
+                                    <th class="py-1.5 px-2 font-semibold text-right w-24">Total Input</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-slate-600">
+                                <tr><td class="py-1 px-2">1</td><td class="py-1 px-2">Ade</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">2</td><td class="py-1 px-2">Arif</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">3</td><td class="py-1 px-2">Dani</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">4</td><td class="py-1 px-2">Fauzi</td><td class="py-1 px-2 text-right">0</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Branch: Kedungkandang -->
+                <div class="bg-white border border-slate-200 rounded p-5 flex flex-col justify-between">
+                    <div>
+                        <h2 class="font-semibold text-sm mb-2 text-slate-800">Branch: Kedungkandang</h2>
+                        <table class="w-full text-left text-xs border-t border-b border-slate-200 zebra-table">
+                            <thead>
+                                <tr class="border-b border-slate-300">
+                                    <th class="py-1.5 px-2 font-semibold w-10">#</th>
+                                    <th class="py-1.5 px-2 font-semibold">Nama</th>
+                                    <th class="py-1.5 px-2 font-semibold text-right w-24">Total Input</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-slate-600">
+                                <tr><td class="py-1 px-2">1</td><td class="py-1 px-2">Anggara</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">2</td><td class="py-1 px-2">Cita</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">3</td><td class="py-1 px-2">Dwi</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">4</td><td class="py-1 px-2">Erwin</td><td class="py-1 px-2 text-right">0</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Branch: Kota Lama -->
+                <div class="bg-white border border-slate-200 rounded p-5 flex flex-col justify-between">
+                    <div>
+                        <h2 class="font-semibold text-sm mb-2 text-slate-800">Branch: Kota Lama</h2>
+                        <table class="w-full text-left text-xs border-t border-b border-slate-200 zebra-table">
+                            <thead>
+                                <tr class="border-b border-slate-300">
+                                    <th class="py-1.5 px-2 font-semibold w-10">#</th>
+                                    <th class="py-1.5 px-2 font-semibold">Nama</th>
+                                    <th class="py-1.5 px-2 font-semibold text-right w-24">Total Input</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-slate-600">
+                                <tr><td class="py-1 px-2">1</td><td class="py-1 px-2">Gilang</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">2</td><td class="py-1 px-2">Kresna</td><td class="py-1 px-2 text-right">0</td></tr>
+                                <tr><td class="py-1 px-2">3</td><td class="py-1 px-2">Putra</td><td class="py-1 px-2 text-right">0</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Branch: Bangil -->
+                <div class="bg-white border border-slate-200 rounded p-5 flex flex-col justify-between">
+                    <div>
+                        <h2 class="font-semibold text-sm mb-2 text-slate-800">Branch: Bangil</h2>
+                        <table class="w-full max-w-md text-left text-xs border-t border-b border-slate-200 zebra-table">
+                            <thead>
+                                <tr class="border-b border-slate-300">
+                                    <th class="py-1.5 px-2 font-semibold w-10">#</th>
+                                    <th class="py-1.5 px-2 font-semibold">Nama</th>
+                                    <th class="py-1.5 px-2 font-semibold text-right w-24">Total Input</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-slate-600">
+                                <tr><td class="py-1 px-2">1</td><td class="py-1 px-2">Nia</td><td class="py-1 px-2 text-right">0</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+
+</body>
+</html>
