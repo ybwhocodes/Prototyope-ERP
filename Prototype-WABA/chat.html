@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dasaria Chat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Cegah scroll body */
+        }
+
+        /* Scrollbar khusus untuk daftar chat */
+        .chat-list-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .chat-list-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .chat-list-scroll::-webkit-scrollbar-thumb {
+            background: #d1d5db; /* Tailwind gray-300 */
+            border-radius: 10px;
+        }
+        .chat-list-scroll::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af; /* Tailwind gray-400 */
+        }
+        
+        /* Class utilitas untuk menyembunyikan scrollbar tanpa menghapus fungsinya */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-[#f0f4f8] h-screen flex text-gray-800">
+
+    <!-- Sidebar diperluas -->
+    <div class="w-64 bg-white border-r border-gray-200 flex flex-col flex-shrink-0 z-10 h-full overflow-y-auto no-scrollbar">
+        
+        <!-- Header Sidebar / Logo -->
+        <div class="h-16 flex items-center px-4 border-b border-gray-100 flex-shrink-0">
+            <button class="text-gray-500 hover:text-gray-700 mr-4">
+                <i class="fa-solid fa-bars text-lg"></i>
+            </button>
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 rounded bg-orange-500 flex items-center justify-center text-white font-bold relative overflow-hidden">
+                     <!-- Bentuk CSS sederhana untuk logo -->
+                     <div class="w-4 h-4 border-2 border-white rounded-sm"></div>
+                     <div class="absolute w-2 h-2 bg-white rounded-sm top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                </div>
+                <div class="h-6 w-px bg-gray-300 mx-2"></div>
+                <span class="font-medium text-gray-800">Frontline Lead</span>
+            </div>
+        </div>
+
+        <!-- Konten Sidebar -->
+        <div class="flex-grow py-4 px-3 space-y-6">
+            
+            <!-- Kategori: Umum -->
+            <div>
+                <p class="px-3 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Umum</p>
+                <div class="space-y-1">
+                    <a href="#" class="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg group">
+                        <i class="fa-solid fa-border-all w-6 text-gray-500 group-hover:text-gray-700 text-center mr-2"></i>
+                        <span class="text-sm font-medium">Dashboard</span>
+                    </a>
+                    
+                    <a href="chat.html" class="flex items-center justify-between px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg group">
+                        <div class="flex items-center">
+                            <i class="fa-regular fa-comment-dots w-6 text-gray-500 group-hover:text-gray-700 text-center mr-2"></i>
+                            <span class="text-sm font-medium text-orange-600 bg-orange-50/50">Chats</span>
+                        </div>
+                    </a>
+
+                    <!-- Item Dropdown: Tiket -->
+                    <div class="space-y-1">
+                        <button class="w-full flex items-center justify-between px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg group focus:outline-none">
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-ticket w-6 text-gray-500 group-hover:text-gray-700 text-center mr-2"></i>
+                                <span class="text-sm font-medium">Tiket</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-down text-xs text-gray-400 transition-transform duration-200"></i>
+                        </button>
+                        <!-- Konten Dropdown (Terbuka) -->
+                        <div class="pl-11 pr-3 space-y-1 relative">
+                            <!-- Garis batas kiri untuk item turunan -->
+                            <div class="absolute left-6 top-0 bottom-0 w-px bg-gray-200"></div>
+                            
+                            <a href="tickets-active.html" class="block px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg relative z-10">
+                                Aktif
+                            </a>
+                            <a href="tickets-history.html" class="block px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg relative z-10">
+                                Riwayat
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kategori: Data Pelanggan -->
+            <div>
+                <p class="px-3 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Data Pelanggan</p>
+                <div class="space-y-1">
+                    <a href="new-instalation.html" class="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg group">
+                        <i class="fa-solid fa-cubes w-6 text-gray-500 group-hover:text-gray-700 text-center mr-2"></i>
+                        <span class="text-sm font-medium">Instalasi Baru</span>
+                    </a>
+                    
+                    <button class="w-full flex items-center justify-between px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg group focus:outline-none">
+                        <div class="flex items-center">
+                            <i class="fa-regular fa-comments w-6 text-gray-500 group-hover:text-gray-700 text-center mr-2"></i>
+                            <span class="text-sm font-medium">Pelanggan</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-xs text-gray-400"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Kategori: Operasional -->
+            <div>
+                <p class="px-3 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Operasional</p>
+                <div class="space-y-1">
+                    <a href="#" class="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg group">
+                        <i class="fa-solid fa-satellite-dish w-6 text-gray-500 group-hover:text-gray-700 text-center mr-2"></i>
+                        <span class="text-sm font-medium">Monitor OLT</span>
+                    </a>
+                    
+                    <a href="#" class="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg group">
+                        <i class="fa-solid fa-network-wired w-6 text-gray-500 group-hover:text-gray-700 text-center mr-2"></i>
+                        <span class="text-sm font-medium">Distribusi</span>
+                    </a>
+
+                    <button class="w-full flex items-center justify-between px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg group focus:outline-none">
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-plug-circle-xmark w-6 text-gray-500 group-hover:text-gray-700 text-center mr-2"></i>
+                            <span class="text-sm font-medium">Dismantle</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-xs text-gray-400"></i>
+                    </button>
+
+                    <a href="#" class="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg group">
+                        <i class="fa-solid fa-map w-6 text-gray-500 group-hover:text-gray-700 text-center mr-2"></i>
+                        <span class="text-sm font-medium">Akses Peta</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Profil Pengguna & Logout -->
+        <div class="border-t border-gray-200 p-3">
+            <div class="flex items-center gap-3 rounded-lg bg-gray-50 p-2">
+                <div class="w-9 h-9 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-semibold border border-blue-200 flex-shrink-0">A</div>
+                <div class="min-w-0 flex-1">
+                    <div class="text-sm font-medium text-gray-900 truncate">Agnes</div>
+                    <div class="text-xs text-gray-500 truncate">Frontline Lead</div>
+                </div>
+            </div>
+            <button class="mt-2 w-full flex items-center gap-3 rounded-lg px-2 py-2 text-sm text-red-600 hover:bg-red-50" title="Logout">
+                <i class="fa-solid fa-right-from-bracket w-6 text-center"></i>
+                <span>Logout</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Wrapper Utama (Navbar di atas, chat di bawah) -->
+    <div class="flex-grow flex flex-col h-full min-w-0 bg-white">
+        
+        <!-- Navbar -->
+        <header class="h-16 border-b border-gray-200 flex items-center px-4 sm:px-6 gap-3">
+            <button class="w-9 h-9 rounded hover:bg-gray-100 text-gray-600 flex items-center justify-center">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="h-6 w-px bg-gray-200"></div>
+            <div class="text-sm font-medium text-gray-800">Chats</div>
+            <div class="ml-auto inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700 border border-emerald-100">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                Terhubung ke Realtime Service
+            </div>
+        </header>
+
+        <!-- Area Aplikasi Chat (Di bawah Navbar) -->
+        <div class="flex-grow flex overflow-hidden">
+            
+            <!-- Panel Daftar Chat -->
+            <div class="w-[340px] bg-white border-r border-gray-200 flex flex-col flex-shrink-0 h-full relative z-0">
+                
+                <!-- Header Daftar Chat (Pencarian & Filter) -->
+                <div class="p-4 border-b border-gray-100 flex-shrink-0">
+                    <!-- Input Pencarian -->
+                    <div class="relative mb-3">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fa-solid fa-magnifying-glass text-gray-400 text-sm"></i>
+                        </div>
+                        <input type="text" class="block w-full pl-9 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 sm:text-sm" placeholder="Cari chat...">
+                    </div>
+                    
+                    <!-- Pil Filter -->
+                    <div class="flex flex-wrap gap-2 mb-3">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-500 text-white cursor-pointer">
+                            Semua
+                        </span>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 cursor-pointer border border-gray-200">
+                            Belum Dibaca
+                        </span>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 cursor-pointer border border-gray-200">
+                            KiosNet
+                        </span>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 cursor-pointer border border-gray-200">
+                            GriyaNet
+                        </span>
+                    </div>
+
+                    <!-- Dropdown Label -->
+                    <div>
+                        <button class="text-xs font-medium text-gray-600 flex items-center hover:text-gray-900 border border-gray-200 rounded-md px-2 py-1">
+                            Semua Label <i class="fa-solid fa-chevron-down ml-1.5 text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Item Daftar Chat -->
+                <div class="flex-grow overflow-y-auto chat-list-scroll">
+                    
+                    <!-- Item Chat 1 (Disematkan, Aktif, Tag) -->
+                    <div class="flex items-start px-4 py-3 bg-blue-50/50 hover:bg-blue-50 cursor-pointer group relative border-b border-gray-50">
+                        <!-- Bar penanda aktif -->
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-blue-500 rounded-r-md"></div>
+                        
+                        <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 flex-shrink-0 mt-0.5">
+                            <i class="fa-solid fa-user text-lg"></i>
+                        </div>
+                        
+                        <div class="ml-3 flex-grow min-w-0">
+                            <div class="flex justify-between items-start mb-0.5">
+                                <div class="flex items-center space-x-2 truncate">
+                                    <h3 class="text-sm font-semibold text-gray-900 truncate">phi</h3>
+                                    <!-- Pil Tag -->
+                                    <div class="flex items-center -space-x-1.5">
+                                        <div class="w-4 h-2.5 rounded-sm bg-blue-600 border border-white z-20 shadow-sm"></div>
+                                        <div class="w-4 h-2.5 rounded-sm bg-teal-500 border border-white z-10 shadow-sm"></div>
+                                        <div class="w-4 h-2.5 rounded-sm bg-indigo-800 border border-white shadow-sm"></div>
+                                    </div>
+                                </div>
+                                <span class="text-xs text-gray-500 whitespace-nowrap ml-2 font-medium">10.26</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <p class="text-xs text-gray-600 truncate pr-2">p</p>
+                                <i class="fa-solid fa-thumbtack text-gray-400 text-xs transform -rotate-45"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item Chat 2 (Disematkan, Belum Dibaca) -->
+                    <div class="flex items-start px-4 py-3 hover:bg-gray-50 cursor-pointer group border-b border-gray-50">
+                        <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 flex-shrink-0 mt-0.5">
+                            <i class="fa-solid fa-user text-lg"></i>
+                        </div>
+                        <div class="ml-3 flex-grow min-w-0">
+                            <div class="flex justify-between items-start mb-0.5">
+                                <div class="flex items-center space-x-2 truncate">
+                                    <h3 class="text-sm font-bold text-gray-900 truncate">P</h3>
+                                     <div class="flex items-center -space-x-1.5">
+                                        <div class="w-4 h-2.5 rounded-sm bg-orange-500 border border-white z-10 shadow-sm"></div>
+                                        <div class="w-4 h-2.5 rounded-sm bg-indigo-800 border border-white shadow-sm"></div>
+                                    </div>
+                                </div>
+                                <span class="text-xs text-blue-600 whitespace-nowrap ml-2 font-semibold">00.55</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <p class="text-xs text-gray-900 font-medium truncate pr-2">Tes</p>
+                                <i class="fa-solid fa-thumbtack text-gray-400 text-xs transform -rotate-45"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item Chat 3 (Disematkan, Tidak ada pesan) -->
+                    <div class="flex items-start px-4 py-3 hover:bg-gray-50 cursor-pointer group border-b border-gray-50">
+                        <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 flex-shrink-0 mt-0.5">
+                            <i class="fa-solid fa-user text-lg"></i>
+                        </div>
+                        <div class="ml-3 flex-grow min-w-0">
+                            <div class="flex justify-between items-start mb-0.5">
+                                <div class="flex items-center space-x-2 truncate">
+                                    <h3 class="text-sm font-semibold text-gray-900 truncate">Griyanet</h3>
+                                    <div class="w-4 h-2.5 bg-blue-700 rounded-sm shadow-sm"></div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center mt-1">
+                                <p class="text-[11px] text-gray-400 italic truncate pr-2">Belum ada pesan</p>
+                                <i class="fa-solid fa-thumbtack text-gray-400 text-xs transform -rotate-45"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item Chat 4 -->
+                    <div class="flex items-start px-4 py-3 hover:bg-gray-50 cursor-pointer group border-b border-gray-50">
+                        <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 flex-shrink-0 mt-0.5">
+                            <i class="fa-solid fa-user text-lg"></i>
+                        </div>
+                        <div class="ml-3 flex-grow min-w-0">
+                            <div class="flex justify-between items-start mb-0.5">
+                                <div class="flex items-center space-x-2 truncate">
+                                    <h3 class="text-sm font-semibold text-gray-900 truncate">6285731308712</h3>
+                                    <div class="flex items-center -space-x-1.5">
+                                        <div class="w-4 h-2.5 rounded-sm bg-black border border-white z-10 shadow-sm"></div>
+                                        <div class="w-4 h-2.5 rounded-sm bg-teal-500 border border-white shadow-sm"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-[11px] text-gray-400 italic truncate mt-1">Belum ada pesan</p>
+                        </div>
+                    </div>
+
+                     <!-- Item Chat 5 -->
+                     <div class="flex items-start px-4 py-3 hover:bg-gray-50 cursor-pointer group border-b border-gray-50">
+                        <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 flex-shrink-0 mt-0.5">
+                            <i class="fa-solid fa-user text-lg"></i>
+                        </div>
+                        <div class="ml-3 flex-grow min-w-0">
+                            <div class="flex justify-between items-start mb-0.5">
+                                <div class="flex items-center space-x-2 truncate">
+                                    <h3 class="text-sm font-semibold text-gray-900 truncate">Khen</h3>
+                                     <div class="flex items-center -space-x-1.5">
+                                        <div class="w-4 h-2.5 rounded-sm bg-indigo-800 border border-white z-10 shadow-sm"></div>
+                                        <div class="w-4 h-2.5 rounded-sm bg-orange-500 border border-white shadow-sm"></div>
+                                    </div>
+                                </div>
+                                <span class="text-xs text-gray-500 whitespace-nowrap ml-2 font-medium">14.57</span>
+                            </div>
+                            <p class="text-xs text-gray-600 truncate mt-0.5">Halo</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Item Chat 6 -->
+                    <div class="flex items-start px-4 py-3 hover:bg-gray-50 cursor-pointer group border-b border-gray-50">
+                        <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 flex-shrink-0 mt-0.5">
+                            <i class="fa-solid fa-user text-lg"></i>
+                        </div>
+                        <div class="ml-3 flex-grow min-w-0">
+                            <div class="flex justify-between items-start mb-0.5">
+                                <div class="flex items-center space-x-2 truncate">
+                                    <h3 class="text-sm font-semibold text-gray-900 truncate">G3 - Risa Fahmi Musyadd...</h3>
+                                </div>
+                            </div>
+                            <p class="text-[11px] text-gray-400 italic truncate mt-1">Belum ada pesan</p>
+                        </div>
+                    </div>
+
+                    <!-- Item Chat 7 -->
+                    <div class="flex items-start px-4 py-3 hover:bg-gray-50 cursor-pointer group border-b border-gray-50">
+                        <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 flex-shrink-0 mt-0.5">
+                            <i class="fa-solid fa-user text-lg"></i>
+                        </div>
+                        <div class="ml-3 flex-grow min-w-0">
+                            <div class="flex justify-between items-start mb-0.5">
+                                <div class="flex items-center space-x-2 truncate">
+                                    <h3 class="text-sm font-semibold text-gray-900 truncate">6281249194476</h3>
+                                     <div class="flex items-center -space-x-1.5">
+                                        <div class="w-4 h-2.5 rounded-sm bg-black border border-white z-10 shadow-sm"></div>
+                                        <div class="w-4 h-2.5 rounded-sm bg-teal-500 border border-white shadow-sm"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-[11px] text-gray-400 italic truncate mt-1">Belum ada pesan</p>
+                        </div>
+                    </div>
+
+                    <!-- Item Chat 8 -->
+                    <div class="flex items-start px-4 py-3 hover:bg-gray-50 cursor-pointer group border-b border-gray-50">
+                        <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 flex-shrink-0 mt-0.5">
+                            <i class="fa-solid fa-user text-lg"></i>
+                        </div>
+                        <div class="ml-3 flex-grow min-w-0">
+                            <div class="flex justify-between items-start mb-0.5">
+                                <div class="flex items-center space-x-2 truncate">
+                                    <h3 class="text-sm font-semibold text-gray-900 truncate">6288131021758</h3>
+                                </div>
+                            </div>
+                            <p class="text-[11px] text-gray-400 italic truncate mt-1">Belum ada pesan</p>
+                        </div>
+                    </div>
+
+                    <!-- Item Chat 9 (Tanda Dibaca) -->
+                    <div class="flex items-start px-4 py-3 hover:bg-gray-50 cursor-pointer group border-b border-gray-50">
+                        <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 flex-shrink-0 mt-0.5">
+                            <i class="fa-solid fa-user text-lg"></i>
+                        </div>
+                        <div class="ml-3 flex-grow min-w-0">
+                            <div class="flex justify-between items-start mb-0.5">
+                                <div class="flex items-center space-x-2 truncate">
+                                    <h3 class="text-sm font-semibold text-gray-900 truncate">AW (More) - Awan</h3>
+                                </div>
+                                <span class="text-xs text-gray-500 whitespace-nowrap ml-2 font-medium">15.08</span>
+                            </div>
+                            <div class="flex items-center mt-0.5">
+                                <i class="fa-solid fa-check-double text-blue-500 text-[10px] mr-1.5"></i>
+                                <p class="text-xs text-gray-600 truncate">Halo Dunia, selamat datang dan lan...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Area Chat Utama (Keadaan Kosong) -->
+            <div class="flex-grow bg-[#f0f4f8] flex flex-col items-center justify-center relative h-full min-w-0">
+                <div class="text-center px-6">
+                    <img src="image_40d668.jpg" alt="Ilustrasi keadaan kosong" class="w-64 max-w-full h-auto mx-auto mb-6 object-contain mix-blend-multiply" onerror="this.src='https://placehold.co/300x200/f0f4f8/a0aec0?text=Chat+Illustration'">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-2">Hai, Tahta</h2>
+                    <p class="text-sm text-gray-500">Pilih percakapan untuk mulai chat</p>
+                </div>
+            </div>
+
+        </div> <!-- End of Chat App Layout -->
+    </div> <!-- End of Main Wrapper -->
+
+</body>
+</html>

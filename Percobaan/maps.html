@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Polyline Tanpa Marker + Polygon Buffer</title>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+
+    .panel {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 10;
+      background: #fff;
+      padding: 12px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+      width: 300px;
+    }
+
+    .panel h3 {
+      margin: 0 0 10px;
+      font-size: 16px;
+    }
+
+    .panel label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    .panel input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+
+    .panel button {
+      padding: 8px 10px;
+      margin-right: 6px;
+      margin-bottom: 6px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: #1976d2;
+      color: white;
+    }
+
+    .panel button.secondary {
+      background: #666;
+    }
+
+    .panel p {
+      font-size: 12px;
+      margin: 8px 0 0;
+      line-height: 1.5;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <h3>Polyline Manual Tanpa Marker</h3>
+
+    <label for="bufferWidth">Lebar polygon sekitar garis (meter)</label>
+    <input type="number" id="bufferWidth" value="5000" min="1" step="100" />
+
+    <button id="btnUndo" class="secondary">Undo Titik</button>
+    <button id="btnReset" class="secondary">Reset</button>
+
+    <p>
+      Klik map untuk membuat titik polyline. Tidak ada marker, hanya garis dan polygon buffer.
+    </p>
+  </div>
+
+  <div id="map"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@7/turf.min.js"></script>
+
+  <script>
+    let map;
+    let polyline;
+    let bufferPolygon = null;
+    let pathPoints = [];
+
+    function initMap() {
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: -7.966590266851479, lng: 112.6331271260388 }, 
+        zoom: 18,
+        mapTypeId: "roadmap"
+      });
+
+      polyline = new google.maps.Polyline({
+        map: map,
+        path: [],
+        geodesic: true,
+        strokeColor: "#0000FF",
+        strokeOpacity: 1,
+        strokeWeight: 4
+      });
+
+      map.addListener("click", function(event) {
+        addPoint(event.latLng);
+      });
+
+      document.getElementById("btnUndo").addEventListener("click", undoLastPoint);
+      document.getElementById("btnReset").addEventListener("click", resetAll);
+      document.getElementById("bufferWidth").addEventListener("input", redrawBuffer);
+    }
+
+    function addPoint(latLng) {
+      pathPoints.push({
+        lat: latLng.lat(),
+        lng: latLng.lng()
+      });
+
+      polyline.setPath(pathPoints);
+      redrawBuffer();
+    }
+
+    function undoLastPoint() {
+      if (pathPoints.length === 0) return;
+
+      pathPoints.pop();
+      polyline.setPath(pathPoints);
+      redrawBuffer();
+    }
+
+    function resetAll() {
+      pathPoints = [];
+      polyline.setPath([]);
+
+      if (bufferPolygon) {
+        bufferPolygon.setMap(null);
+        bufferPolygon = null;
+      }
+    }
+
+    function redrawBuffer() {
+      if (bufferPolygon) {
+        bufferPolygon.setMap(null);
+        bufferPolygon = null;
+      }
+
+      if (pathPoints.length < 2) return;
+
+      const bufferMeters = parseFloat(document.getElementById("bufferWidth").value || 0);
+      if (!bufferMeters || bufferMeters <= 0) return;
+
+      const lineCoords = pathPoints.map(function(point) {
+        return [point.lng, point.lat];
+      });
+
+      const line = turf.lineString(lineCoords);
+      const buffered = turf.buffer(line, bufferMeters / 1000, {
+        units: "kilometers"
+      });
+
+      if (!buffered || !buffered.geometry) return;
+
+      drawGeoJsonPolygon(buffered);
+    }
+
+    function drawGeoJsonPolygon(geojson) {
+      const geometry = geojson.geometry;
+
+      if (geometry.type === "Polygon") {
+        const paths = geometry.coordinates.map(function(ring) {
+          return ring.map(function(coord) {
+            return {
+              lat: coord[1],
+              lng: coord[0]
+            };
+          });
+        });
+
+        bufferPolygon = new google.maps.Polygon({
+          map: map,
+          paths: paths,
+          strokeColor: "#0000AA",
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: "#0000FF",
+          fillOpacity: 0.25
+        });
+      }
+
+      if (geometry.type === "MultiPolygon") {
+        const allPaths = [];
+
+        geometry.coordinates.forEach(function(polygonCoords) {
+          polygonCoords.forEach(function(ring) {
+            allPaths.push(
+              ring.map(function(coord) {
+                return {
+                  lat: coord[1],
+                  lng: coord[0]
+                };
+              })
+            );
+          });
+        });
+
+        bufferPolygon = new google.maps.Polygon({
+          map: map,
+          paths: allPaths,
+          strokeColor: "#0000AA",
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: "#0000FF",
+          fillOpacity: 0.25
+        });
+      }
+    }
+
+    window.initMap = initMap;
+  </script>
+
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuuQfltwTD_aAh4CCQGOKrw2xcwT-sSYY&callback=initMap"
+    async
+    defer>
+  </script>
+</body>
+</html>
