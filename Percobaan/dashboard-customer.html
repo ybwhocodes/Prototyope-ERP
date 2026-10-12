@@ -6,6 +6,11 @@
     <title>Dashboard Pelanggan Cabang - GriyaNet</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script>
+        if (typeof Chart === 'undefined') {
+            document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"><\/script>');
+        }
+    </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         body {
@@ -425,8 +430,8 @@
                         </h2>
                         <span class="text-[11px] text-slate-400">4 Status Utama</span>
                     </div>
-                    <div class="h-64 w-full relative">
-                        <canvas id="chartDonutStatus"></canvas>
+                    <div class="h-64 w-full relative" style="min-height: 256px;">
+                        <canvas id="chartDonutStatus" class="w-full h-full block"></canvas>
                     </div>
                     <p class="text-[11px] text-slate-500 mt-2 text-center">Menampilkan porsi dan rasio riil: Active, Isolir, Fasum, dan Terminate.</p>
                 </div>
@@ -438,8 +443,8 @@
                             <i class="fas fa-tachometer-alt text-orange-500 mr-1.5"></i>B. Penetrasi Paket Layanan & Bandwidth
                         </h2>
                     </div>
-                    <div class="h-64 w-full relative">
-                        <canvas id="chartBarPaket"></canvas>
+                    <div class="h-64 w-full relative" style="min-height: 256px;">
+                        <canvas id="chartBarPaket" class="w-full h-full block"></canvas>
                     </div>
                     <p class="text-[11px] text-slate-500 mt-2 text-center">Pemetaan popularitas 7 paket: Lite s/d 100 Mbps serta estimasi daya beli pelanggan.</p>
                 </div>
@@ -555,8 +560,8 @@
                             </div>
                             <span class="text-[10px] font-semibold px-2 py-0.5 bg-white border border-slate-200 rounded text-slate-600 shadow-2xs">Stacked Chart</span>
                         </div>
-                        <div class="h-64 w-full relative">
-                            <canvas id="chartLateByTenure"></canvas>
+                        <div class="h-64 w-full relative" style="min-height: 256px;">
+                            <canvas id="chartLateByTenure" class="w-full h-full block"></canvas>
                         </div>
                         <div class="flex items-center justify-center space-x-4 text-[11px] text-slate-500 mt-3 pt-2 border-t border-slate-200">
                             <span class="inline-flex items-center"><span class="w-2.5 h-2.5 rounded-sm bg-amber-400 mr-1.5"></span>Ringan (1-3H)</span>
@@ -974,15 +979,18 @@
 
         function renderDashboard() {
             const branch = branchDataset.temas;
-
             updateKpis(branch);
 
-            donutStatusChart.data.datasets[0].data = [branch.active, branch.isolir, branch.fasum, branch.terminate];
-            donutStatusChart.update();
+            if (donutStatusChart) {
+                donutStatusChart.data.datasets[0].data = [branch.active, branch.isolir, branch.fasum, branch.terminate];
+                donutStatusChart.update();
+            }
 
-            barPaketChart.data.labels = branch.paket.labels;
-            barPaketChart.data.datasets[0].data = branch.paket.data;
-            barPaketChart.update();
+            if (barPaketChart) {
+                barPaketChart.data.labels = branch.paket.labels;
+                barPaketChart.data.datasets[0].data = branch.paket.data;
+                barPaketChart.update();
+            }
         }
 
         // Dynamic Period Filter Category Switch
@@ -990,6 +998,12 @@
         const pickerSegmen = document.getElementById('picker-segmen');
         const pickerBulan = document.getElementById('picker-bulan');
         const pickerRentang = document.getElementById('picker-rentang');
+
+        document.getElementById('filter-paket').addEventListener('change', renderDashboard);
+        document.getElementById('filter-durasi').addEventListener('change', renderDashboard);
+        document.getElementById('filter-bulan').addEventListener('change', renderDashboard);
+        document.getElementById('filter-date-start').addEventListener('change', renderDashboard);
+        document.getElementById('filter-date-end').addEventListener('change', renderDashboard);
 
         modeDurasiSelect.addEventListener('change', (e) => {
             const val = e.target.value;
@@ -1139,8 +1153,17 @@
         });
 
         // Initialize on load
+        let chartCheckAttempts = 0;
         function startDashboard() {
             if (typeof Chart === 'undefined') {
+                chartCheckAttempts++;
+                if (chartCheckAttempts > 40) {
+                    console.error('Chart.js gagal dimuat dari CDN.');
+                    const initialData = branchDataset.temas;
+                    updateKpis(initialData);
+                    renderAreaTable();
+                    return;
+                }
                 setTimeout(startDashboard, 50);
                 return;
             }
