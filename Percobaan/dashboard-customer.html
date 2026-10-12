@@ -855,15 +855,28 @@
             const fasumPct = ((data.fasum / data.total) * 100).toFixed(1);
             const terminatePct = ((data.terminate / data.total) * 100).toFixed(1);
 
-            document.getElementById('kpi-active').textContent = data.active.toLocaleString();
-            document.getElementById('kpi-active-pct').textContent = `${activePct}%`;
-            document.getElementById('kpi-isolir').textContent = data.isolir.toLocaleString();
-            document.getElementById('kpi-isolir-pct').textContent = `${isolirPct}%`;
-            document.getElementById('kpi-fasum').textContent = data.fasum.toLocaleString();
-            document.getElementById('kpi-fasum-pct').textContent = `${fasumPct}%`;
-            document.getElementById('kpi-terminate').textContent = data.terminate.toLocaleString();
-            document.getElementById('kpi-terminate-pct').textContent = `${terminatePct}%`;
-            document.getElementById('label-cabang-aktif').textContent = data.name;
+            const elActive = document.getElementById('kpi-active');
+            if (elActive) elActive.textContent = data.active.toLocaleString();
+            const elActivePct = document.getElementById('kpi-active-pct');
+            if (elActivePct) elActivePct.textContent = `${activePct}%`;
+
+            const elIsolir = document.getElementById('kpi-isolir');
+            if (elIsolir) elIsolir.textContent = data.isolir.toLocaleString();
+            const elIsolirPct = document.getElementById('kpi-isolir-pct');
+            if (elIsolirPct) elIsolirPct.textContent = `${isolirPct}%`;
+
+            const elFasum = document.getElementById('kpi-fasum');
+            if (elFasum) elFasum.textContent = data.fasum.toLocaleString();
+            const elFasumPct = document.getElementById('kpi-fasum-pct');
+            if (elFasumPct) elFasumPct.textContent = `${fasumPct}%`;
+
+            const elTerminate = document.getElementById('kpi-terminate');
+            if (elTerminate) elTerminate.textContent = data.terminate.toLocaleString();
+            const elTerminatePct = document.getElementById('kpi-terminate-pct');
+            if (elTerminatePct) elTerminatePct.textContent = `${terminatePct}%`;
+
+            const elLabelCabang = document.getElementById('label-cabang-aktif');
+            if (elLabelCabang) elLabelCabang.textContent = data.name;
         }
 
         function initCharts(data) {
