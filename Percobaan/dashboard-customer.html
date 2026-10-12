@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Pelanggan Cabang - GriyaNet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+        }
+
+        .main-content-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+        .main-content-scroll::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .main-content-scroll::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .main-content-scroll::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        @media print {
+            aside, header, #filter-section, .no-print {
+                display: none !important;
+            }
+            main {
+                padding: 0 !important;
+                overflow: visible !important;
+            }
+            body {
+                overflow: visible !important;
+            }
+        }
+    </style>
+</head>
+<body class="flex flex-col h-screen text-slate-800 text-sm overflow-hidden bg-white">
+
+    <!-- Navbar -->
+    <header class="bg-[#1e293b] text-white flex items-center justify-between px-4 py-2 shrink-0 border-b-2 border-orange-500 shadow-sm z-20">
+        <div class="flex items-center space-x-2">
+            <span class="font-bold text-lg text-orange-500">GriyaNet</span>
+            <span class="text-sm font-semibold">- Monitoring Cabang</span>
+        </div>
+
+        <div class="flex items-center space-x-4">
+            <span class="text-xs font-semibold text-orange-500 tracking-wider">MODE DEVELOPMENT - Admin</span>
+
+            <div class="flex space-x-1">
+                <button class="bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs font-medium transition-colors">Sales</button>
+                <button class="bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs font-medium transition-colors">Access</button>
+                <button class="bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs font-medium transition-colors">Frontline Lead</button>
+                <button class="bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded text-xs font-medium transition-colors">Planner & Warehouse</button>
+            </div>
+
+            <button class="flex items-center space-x-1 border border-slate-500 hover:bg-slate-700 px-3 py-1 rounded text-xs transition-colors ml-4">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="flex flex-1 min-h-0 overflow-hidden">
+
+        <!-- Sidebar -->
+        <aside class="w-64 bg-[#f8fafc] border-r border-slate-200 flex flex-col shrink-0 overflow-y-auto hidden md:flex main-content-scroll">
+            <div class="py-3">
+                <ul class="flex flex-col space-y-0.5 text-xs">
+                    <!-- Dashboard Utama -->
+                    <li>
+                        <a href="/oprasional" class="flex items-center px-4 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-500 shrink-0"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+
+                    <div class="border-b border-slate-200 my-2"></div>
+                    <div class="px-4 mt-2 mb-1 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                        all customers
+                    </div>
+
+                    <!-- Halaman Aktif: Dashboard Customer (Pengganti active, isolir, fasum, terminate) -->
+                    <li>
+                        <a href="dashboard-customer.html" class="flex items-center px-4 py-2 bg-blue-50 text-blue-700 border-l-4 border-blue-500 font-semibold transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-blue-600 shrink-0"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            <span>Dashboard Customer</span>
+                        </a>
+                    </li>
+
+                    <div class="border-b border-slate-200 my-2"></div>
+                    <div class="px-4 mt-2 mb-1 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                        All Work Orders
+                    </div>
+
+                    <li>
+                        <a href="/oprasional/allpsb" class="flex items-center px-4 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-500 shrink-0"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg>
+                            <span>Pemasangan Baru</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/oprasional/troubleshoots/work-orders" class="flex items-center px-4 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-500 shrink-0"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                            <span>Troubleshoot</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/oprasional/distri/allwotoday" class="flex items-center px-4 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-500 shrink-0"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                            <span>Distribusi</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/oprasional/dismantle/work-order" class="flex items-center px-4 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-500 shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            <span>Dismantle</span>
+                        </a>
+                    </li>
+
+                    <div class="border-b border-slate-200 my-2"></div>
+                    <div class="px-4 mt-2 mb-1 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                        New Customers
+                    </div>
+
+                    <li>
+                        <a href="/oprasional/antrian/requestvalidasi" class="flex items-center px-4 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-500 shrink-0"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            <span>Request Validasi</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/oprasional/antrian/payment" class="flex items-center px-4 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-500 shrink-0"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            <span>Wait List</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/oprasional/antrian/penjadwalan" class="flex items-center px-4 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-500 shrink-0"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                            <span>Penjadwalan</span>
+                        </a>
+                    </li>
+
+                    <div class="border-b border-slate-200 my-2"></div>
+                    <div class="px-4 mt-2 mb-1 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                        New Troubleshoots
+                    </div>
+
+                    <li>
+                        <a href="/oprasional/troubleshoots/wait-lists" class="flex items-center px-4 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-500 shrink-0"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            <span>Wait List</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/oprasional/troubleshoots/schedules" class="flex items-center px-4 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-500 shrink-0"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                            <span>Penjadwalan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/oprasional/troubleshoots/histories" class="flex items-center px-4 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-500 shrink-0"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
+                            <span>History WO</span>
+                        </a>
+                    </li>
+
+                    <div class="border-b border-slate-200 my-2"></div>
+                    <div class="px-4 mt-2 mb-1 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                        New Distributions
+                    </div>
+
+                    <li>
+                        <a href="/oprasional/distri/monitorodp" class="flex items-center px-4 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-500 shrink-0"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                            <span>Monitor ODP</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/oprasional/distri/request/areashow" class="flex items-center px-4 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-500 shrink-0"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            <span>List Area Spliters</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/oprasional/distri/splittersReady" class="flex items-center px-4 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-500 shrink-0"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                            <span>Splitter No Config</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/oprasional/distri/progress" class="flex items-center px-4 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-500 shrink-0"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                            <span>Progress</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/oprasional/distri/waitlist" class="flex items-center px-4 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-500 shrink-0"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            <span>Wait List</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/oprasional/distri/penjadwalan" class="flex items-center px-4 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-500 shrink-0"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                            <span>Penjadwalan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/oprasional/distri/map-accesses" class="flex items-center px-4 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-500 shrink-0"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="22"></line></svg>
+                            <span>Map Access</span>
+                        </a>
+                    </li>
+
+                    <div class="border-b border-slate-200 my-2"></div>
+                    <div class="px-4 mt-2 mb-1 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                        New Dismantles
+                    </div>
+
+                    <li>
+                        <a href="/oprasional/dismantle/wait-list" class="flex items-center px-4 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-500 shrink-0"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            <span>Wait List</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/oprasional/dismantle/penjadwalan" class="flex items-center px-4 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-500 shrink-0"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                            <span>Penjadwalan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/oprasional/dismantle/history" class="flex items-center px-4 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-500 shrink-0"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
+                            <span>History WO</span>
+                        </a>
+                    </li>
+
+                    <div class="border-b border-slate-200 my-2"></div>
+                    <div class="px-4 mt-2 mb-1 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                        Olt
+                    </div>
+
+                    <li>
+                        <a href="/oprasional/monitorolt" class="flex items-center px-4 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-500 shrink-0"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                            <span>Monitor OLT</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/oprasional/regist" class="flex items-center px-4 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-500 shrink-0"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            <span>Registrasi</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/oprasional/modem-replace" class="flex items-center px-4 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-500 shrink-0"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
+                            <span>Replace Modem</span>
+                        </a>
+                    </li>
+
+                    <div class="border-b border-slate-200 my-2"></div>
+                    <div class="px-4 mt-2 mb-1 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                        Management
+                    </div>
+
+                    <li>
+                        <a href="/oprasional/management-teams" class="flex items-center px-4 py-2 text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-slate-500 shrink-0"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            <span>Team Management</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 min-h-0 min-w-0 p-6 bg-slate-50 overflow-y-auto main-content-scroll space-y-6">
+
+            <!-- Title & Quick Header -->
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-3 border-b border-slate-200">
+                <div>
+                    <h1 class="text-xl font-bold text-slate-800">Dashboard Customer</h1>
+                    <p class="text-xs text-slate-500">Pemantauan distribusi pelanggan, risiko isolir, penetrasi paket, dan retensi level cabang.</p>
+                </div>
+                <div class="mt-2 sm:mt-0 text-xs font-semibold px-2.5 py-1 bg-slate-200 text-slate-700 rounded self-start sm:self-auto">
+                    Cabang Terpilih: <span id="label-cabang-aktif" class="text-blue-700 font-bold">Temas</span>
+                </div>
+            </div>
+
+            <!-- 4. Filter Interaktif -->
+            <section id="filter-section" class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-end">
+                    <!-- Paket Bandwidth -->
+                    <div class="md:col-span-4">
+                        <label for="filter-paket" class="block text-[11px] font-semibold text-slate-600 mb-1">Paket Bandwidth</label>
+                        <select id="filter-paket" class="w-full text-xs border border-slate-300 rounded px-2.5 py-1.5 focus:outline-none focus:ring-1 focus:ring-blue-500 bg-white">
+                            <option value="all">Semua Paket</option>
+                            <option value="lite">Lite</option>
+                            <option value="7mbps">7 Mbps</option>
+                            <option value="10mbps">10 Mbps</option>
+                            <option value="15mbps">15 Mbps</option>
+                            <option value="30mbps">30 Mbps</option>
+                            <option value="50mbps">50 Mbps</option>
+                            <option value="100mbps">100 Mbps</option>
+                        </select>
+                    </div>
+
+                    <!-- Kategori Pilihan Periode -->
+                    <div class="md:col-span-3">
+                        <label for="filter-mode-durasi" class="block text-[11px] font-semibold text-slate-600 mb-1">Kategori Filter Periode</label>
+                        <select id="filter-mode-durasi" class="w-full text-xs border border-slate-300 rounded px-2.5 py-1.5 focus:outline-none focus:ring-1 focus:ring-blue-500 bg-white font-medium text-blue-700">
+                            <option value="segmen">Segmen Durasi (Bulan)</option>
+                            <option value="bulan">Pilih Bulan Tertentu</option>
+                            <option value="rentang">Rentang Tanggal (Date Range)</option>
+                        </select>
+                    </div>
+
+                    <!-- Dynamic Picker Field -->
+                    <div class="md:col-span-5">
+                        <!-- Mode A: Segmen Durasi -->
+                        <div id="picker-segmen" class="block">
+                            <label for="filter-durasi" class="block text-[11px] font-semibold text-slate-600 mb-1">Pilihan Segmen Durasi</label>
+                            <select id="filter-durasi" class="w-full text-xs border border-slate-300 rounded px-2.5 py-1.5 focus:outline-none focus:ring-1 focus:ring-blue-500 bg-white">
+                                <option value="all">Semua Durasi</option>
+                                <option value="baru">&lt; 6 Bulan (Baru)</option>
+                                <option value="menengah">6 - 12 Bulan (Menengah)</option>
+                                <option value="loyal">&gt; 12 Bulan (Loyal)</option>
+                            </select>
+                        </div>
+
+                        <!-- Mode B: Bulan Tertentu -->
+                        <div id="picker-bulan" class="hidden">
+                            <label for="filter-bulan" class="block text-[11px] font-semibold text-slate-600 mb-1">Pilih Bulan & Tahun</label>
+                            <input type="month" id="filter-bulan" value="2026-03" class="w-full text-xs border border-slate-300 rounded px-2.5 py-1.5 focus:outline-none focus:ring-1 focus:ring-blue-500 bg-white">
+                        </div>
+
+                        <!-- Mode C: Rentang Tanggal -->
+                        <div id="picker-rentang" class="hidden">
+                            <label class="block text-[11px] font-semibold text-slate-600 mb-1">Rentang Tanggal (Dari - Sampai)</label>
+                            <div class="flex items-center space-x-1.5">
+                                <input type="date" id="filter-date-start" value="2026-01-01" class="w-1/2 text-xs border border-slate-300 rounded px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-blue-500 bg-white">
+                                <span class="text-xs text-slate-400">s/d</span>
+                                <input type="date" id="filter-date-end" value="2026-03-31" class="w-1/2 text-xs border border-slate-300 rounded px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-blue-500 bg-white">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-2 mt-3 pt-3 border-t border-slate-100">
+                    <button id="btn-reset" class="px-3 py-1.5 text-xs font-medium border border-slate-300 hover:bg-slate-100 text-slate-700 rounded transition flex items-center space-x-1">
+                        <i class="fas fa-undo-alt text-[10px]"></i>
+                        <span>Reset Filter</span>
+                    </button>
+                    <button id="btn-cetak" class="px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-700 text-white rounded transition flex items-center space-x-1 shadow-sm">
+                        <i class="fas fa-print text-[10px]"></i>
+                        <span>Cetak Rekap (PDF)</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- 2. Metrik Utama (KPI Cards Level Cabang) -->
+            <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Pelanggan Active -->
+                <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex flex-col justify-between border-t-4 border-t-emerald-500">
+                    <div class="flex justify-between items-start">
+                        <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Pelanggan Active</span>
+                        <i class="fas fa-check-circle text-emerald-500 text-sm"></i>
+                    </div>
+                    <div class="mt-2">
+                        <div class="text-2xl font-black text-emerald-600" id="kpi-active">1,025</div>
+                    </div>
+                </div>
+
+                <!-- Pelanggan Isolir -->
+                <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex flex-col justify-between border-t-4 border-t-amber-500">
+                    <div class="flex justify-between items-start">
+                        <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Pelanggan Isolir</span>
+                        <i class="fas fa-ban text-amber-500 text-sm"></i>
+                    </div>
+                    <div class="mt-2">
+                        <div class="text-2xl font-black text-amber-600" id="kpi-isolir">115</div>
+                    </div>
+                </div>
+
+                <!-- Fasilitas Umum (Fasum) -->
+                <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex flex-col justify-between border-t-4 border-t-blue-500">
+                    <div class="flex justify-between items-start">
+                        <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Fasum (Sosial)</span>
+                        <i class="fas fa-mosque text-blue-500 text-sm"></i>
+                    </div>
+                    <div class="mt-2">
+                        <div class="text-2xl font-black text-blue-600" id="kpi-fasum">45</div>
+                    </div>
+                </div>
+
+                <!-- Pelanggan Terminate -->
+                <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex flex-col justify-between border-t-4 border-t-rose-500">
+                    <div class="flex justify-between items-start">
+                        <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Pelanggan Terminate</span>
+                        <i class="fas fa-user-times text-rose-500 text-sm"></i>
+                    </div>
+                    <div class="mt-2">
+                        <div class="text-2xl font-black text-rose-600" id="kpi-terminate">65</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Komponen Chart & Visualisasi Statistik -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+                <!-- A. Donut Chart: Komposisi Status Pelanggan -->
+                <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div class="flex items-center justify-between border-b pb-2 mb-3">
+                        <h2 class="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                            <i class="fas fa-chart-pie text-blue-500 mr-1.5"></i>A. Komposisi Status Pelanggan Cabang
+                        </h2>
+                        <span class="text-[11px] text-slate-400">4 Status Utama</span>
+                    </div>
+                    <div class="h-64 relative flex items-center justify-center">
+                        <canvas id="chartDonutStatus"></canvas>
+                    </div>
+                    <p class="text-[11px] text-slate-500 mt-2 text-center">Menampilkan porsi dan rasio riil: Active, Isolir, Fasum, dan Terminate.</p>
+                </div>
+
+                <!-- B. Bar Chart: Penetrasi Paket Layanan & Bandwidth -->
+                <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div class="flex items-center justify-between border-b pb-2 mb-3">
+                        <h2 class="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                            <i class="fas fa-tachometer-alt text-orange-500 mr-1.5"></i>B. Penetrasi Paket Layanan & Bandwidth
+                        </h2>
+                    </div>
+                    <div class="h-64 relative">
+                        <canvas id="chartBarPaket"></canvas>
+                    </div>
+                    <p class="text-[11px] text-slate-500 mt-2 text-center">Pemetaan popularitas 7 paket: Lite s/d 100 Mbps serta estimasi daya beli pelanggan.</p>
+                </div>
+
+            </div>
+
+            <!-- Rangkuman Matriks: Lama Subscribe (Bulan) vs Telat Pembayaran (Hari) -->
+            <section class="bg-white rounded-xl border border-slate-200/90 shadow-sm p-6 space-y-6 relative overflow-hidden">
+                <!-- Top Accent Line -->
+                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500"></div>
+
+                <!-- Section Header + Action Badge -->
+                <div class="border-b border-slate-100 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
+                    <div>
+                        <div class="flex items-center space-x-2.5">
+                            <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-amber-500/10 text-amber-600 text-sm ring-1 ring-amber-500/20">
+                                <i class="fas fa-hourglass-half"></i>
+                            </span>
+                            <div>
+                                <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+                                    Analisis Keterlambatan: Lama Subscribe vs Telat Bayar
+                                    <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-rose-50 text-rose-600 border border-rose-200 normal-case tracking-normal">Early Churn Risk</span>
+                                </h2>
+                                <p class="text-xs text-slate-500 mt-0.5">Pemetaan tingkat keparahan tunggakan (severity) per kelompok umur langganan pelanggan.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filter Cepat Severity -->
+                    <div class="flex items-center space-x-1 self-start md:self-auto bg-slate-100/80 p-1 rounded-lg text-xs border border-slate-200/60">
+                        <button id="btn-tenure-all" class="px-3 py-1.5 rounded-md font-semibold bg-white text-slate-800 shadow-sm transition" onclick="filterTenureView('all')">
+                            Semua Telat
+                        </button>
+                        <button id="btn-tenure-warning" class="px-3 py-1.5 rounded-md font-medium text-slate-600 hover:text-slate-900 transition" onclick="filterTenureView('warning')">
+                            <span class="w-2 h-2 rounded-full inline-block bg-orange-400 mr-1"></span>H+4 s/d H+7
+                        </button>
+                        <button id="btn-tenure-kritis" class="px-3 py-1.5 rounded-md font-medium text-rose-600 hover:text-rose-700 transition" onclick="filterTenureView('kritis')">
+                            <span class="w-2 h-2 rounded-full inline-block bg-rose-500 mr-1"></span>&gt; H+7 (Kritis)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 3 Metric Cards Severity Summary with Visual Polish -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <!-- Ringan -->
+                    <div class="p-4 rounded-xl border border-amber-200/80 bg-gradient-to-br from-amber-50/70 to-white shadow-xs hover:shadow-sm transition relative overflow-hidden group">
+                        <div class="absolute -right-2 -bottom-2 text-amber-500/10 text-6xl pointer-events-none group-hover:scale-110 transition-transform">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <div class="flex items-start justify-between">
+                            <div class="flex items-center space-x-1.5">
+                                <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                                <span class="text-[11px] font-bold text-amber-800 uppercase tracking-wider">Ringan (1 - 3 Hari)</span>
+                            </div>
+                            <span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-bold">48.7%</span>
+                        </div>
+                        <div class="mt-2.5">
+                            <div class="text-2xl font-black text-slate-800 tracking-tight">56 <span class="text-xs font-normal text-slate-500">Pelanggan</span></div>
+                            <div class="flex items-center text-[11px] text-amber-700 mt-1 font-medium">
+                                <i class="fab fa-whatsapp mr-1 text-emerald-600"></i> Reminder WA Otomatis
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sedang -->
+                    <div class="p-4 rounded-xl border border-orange-200/80 bg-gradient-to-br from-orange-50/70 to-white shadow-xs hover:shadow-sm transition relative overflow-hidden group">
+                        <div class="absolute -right-2 -bottom-2 text-orange-500/10 text-6xl pointer-events-none group-hover:scale-110 transition-transform">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="flex items-start justify-between">
+                            <div class="flex items-center space-x-1.5">
+                                <span class="w-2 h-2 rounded-full bg-orange-500"></span>
+                                <span class="text-[11px] font-bold text-orange-800 uppercase tracking-wider">Sedang (4 - 7 Hari)</span>
+                            </div>
+                            <span class="px-2 py-0.5 rounded-full bg-orange-100 text-orange-800 text-[10px] font-bold">33.0%</span>
+                        </div>
+                        <div class="mt-2.5">
+                            <div class="text-2xl font-black text-slate-800 tracking-tight">38 <span class="text-xs font-normal text-slate-500">Pelanggan</span></div>
+                            <div class="flex items-center text-[11px] text-orange-700 mt-1 font-medium">
+                                <i class="fas fa-phone-alt mr-1 text-orange-600"></i> Warning Call & Grace Period
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kritis -->
+                    <div class="p-4 rounded-xl border border-rose-200/80 bg-gradient-to-br from-rose-50/70 to-white shadow-xs hover:shadow-sm transition relative overflow-hidden group">
+                        <div class="absolute -right-2 -bottom-2 text-rose-500/10 text-6xl pointer-events-none group-hover:scale-110 transition-transform">
+                            <i class="fas fa-ban"></i>
+                        </div>
+                        <div class="flex items-start justify-between">
+                            <div class="flex items-center space-x-1.5">
+                                <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+                                <span class="text-[11px] font-bold text-rose-800 uppercase tracking-wider">Kritis (&gt; 7 Hari)</span>
+                            </div>
+                            <span class="px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 text-[10px] font-bold">18.3%</span>
+                        </div>
+                        <div class="mt-2.5">
+                            <div class="text-2xl font-black text-rose-600 tracking-tight">21 <span class="text-xs font-normal text-slate-500">Pelanggan</span></div>
+                            <div class="flex items-center text-[11px] text-rose-700 mt-1 font-bold">
+                                <i class="fas fa-user-times mr-1 text-rose-600"></i> Isolir Aktif & Churn Alert
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start pt-2">
+                    <!-- Chart: Stacked Bar Severity per Tenure -->
+                    <div class="lg:col-span-6 flex flex-col justify-between bg-slate-50/80 p-5 rounded-xl border border-slate-200">
+                        <div class="flex items-center justify-between mb-3 border-b border-slate-200 pb-2">
+                            <div>
+                                <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wider">Komposisi Severity per Kelompok Umur</h3>
+                                <p class="text-[11px] text-slate-500">Volume tunggakan berdasarkan lama aktif pelanggan</p>
+                            </div>
+                            <span class="text-[10px] font-semibold px-2 py-0.5 bg-white border border-slate-200 rounded text-slate-600 shadow-2xs">Stacked Chart</span>
+                        </div>
+                        <div class="h-64 relative">
+                            <canvas id="chartLateByTenure"></canvas>
+                        </div>
+                        <div class="flex items-center justify-center space-x-4 text-[11px] text-slate-500 mt-3 pt-2 border-t border-slate-200">
+                            <span class="inline-flex items-center"><span class="w-2.5 h-2.5 rounded-sm bg-amber-400 mr-1.5"></span>Ringan (1-3H)</span>
+                            <span class="inline-flex items-center"><span class="w-2.5 h-2.5 rounded-sm bg-orange-400 mr-1.5"></span>Sedang (4-7H)</span>
+                            <span class="inline-flex items-center"><span class="w-2.5 h-2.5 rounded-sm bg-rose-500 mr-1.5"></span>Kritis (&gt;7H)</span>
+                        </div>
+                    </div>
+
+                    <!-- Tabel Matriks Interaktif -->
+                    <div class="lg:col-span-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wider">Matriks Cross-Tabulation Detail</h3>
+                                <p class="text-[11px] text-slate-500">Distribusi silang umur langganan terhadap lama telat bayar</p>
+                            </div>
+                            <span class="text-[11px] font-semibold text-slate-700 bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200">Total 115 Customer</span>
+                        </div>
+
+                        <div class="overflow-x-auto rounded-xl border border-slate-200 shadow-2xs">
+                            <table class="w-full text-xs">
+                                <thead class="bg-gradient-to-r from-slate-900 to-slate-800 text-slate-200 text-[11px]">
+                                    <tr>
+                                        <th class="px-3.5 py-3 text-left font-semibold">Lama Subscribe (Bulan)</th>
+                                        <th class="px-2.5 py-3 text-center font-semibold text-amber-300">1 - 3 Hari<br><span class="text-[9px] text-slate-400 font-normal">Reminder</span></th>
+                                        <th class="px-2.5 py-3 text-center font-semibold text-orange-400">4 - 7 Hari<br><span class="text-[9px] text-slate-400 font-normal">Warning</span></th>
+                                        <th class="px-2.5 py-3 text-center font-semibold text-rose-400">&gt; 7 Hari<br><span class="text-[9px] text-slate-400 font-normal">Kritis</span></th>
+                                        <th class="px-3.5 py-3 text-right font-bold text-white">Total Segment</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100 bg-white font-mono text-[11px]">
+                                    <!-- Pelanggan Baru -->
+                                    <tr class="hover:bg-amber-50/50 transition-colors">
+                                        <td class="px-3.5 py-3 font-sans">
+                                            <div class="font-bold text-slate-800 flex items-center gap-1.5">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+                                                &lt; 6 Bulan (Pelanggan Baru)
+                                            </div>
+                                            <div class="text-[10px] text-slate-400 font-normal pl-3">Fase adaptasi tagihan & resiko churn tertinggi</div>
+                                        </td>
+                                        <td class="px-2.5 py-3 text-center text-amber-700 font-semibold bg-amber-50/20">24</td>
+                                        <td class="px-2.5 py-3 text-center text-orange-700 font-semibold bg-orange-50/20">18</td>
+                                        <td class="px-2.5 py-3 text-center bg-rose-50/30">
+                                            <span class="px-2 py-0.5 rounded-md bg-rose-100 text-rose-700 font-bold border border-rose-200">12</span>
+                                        </td>
+                                        <td class="px-3.5 py-3 text-right font-bold text-slate-900 font-sans">
+                                            54 <span class="text-[10px] font-normal text-slate-500">(47.0%)</span>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Pelanggan Menengah -->
+                                    <tr class="hover:bg-orange-50/50 transition-colors">
+                                        <td class="px-3.5 py-3 font-sans">
+                                            <div class="font-bold text-slate-800 flex items-center gap-1.5">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                                                6 - 12 Bulan (Menengah)
+                                            </div>
+                                            <div class="text-[10px] text-slate-400 font-normal pl-3">Pola bayar mulai terbentuk stabil</div>
+                                        </td>
+                                        <td class="px-2.5 py-3 text-center text-amber-700 font-semibold bg-amber-50/20">20</td>
+                                        <td class="px-2.5 py-3 text-center text-orange-700 font-semibold bg-orange-50/20">14</td>
+                                        <td class="px-2.5 py-3 text-center bg-rose-50/30">
+                                            <span class="px-2 py-0.5 rounded-md bg-rose-100 text-rose-700 font-bold border border-rose-200">7</span>
+                                        </td>
+                                        <td class="px-3.5 py-3 text-right font-bold text-slate-900 font-sans">
+                                            41 <span class="text-[10px] font-normal text-slate-500">(35.6%)</span>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Pelanggan Loyal -->
+                                    <tr class="hover:bg-blue-50/50 transition-colors">
+                                        <td class="px-3.5 py-3 font-sans">
+                                            <div class="font-bold text-slate-800 flex items-center gap-1.5">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                                &gt; 12 Bulan (Loyal)
+                                            </div>
+                                            <div class="text-[10px] text-slate-400 font-normal pl-3">Customer jangka panjang, resiko churn rendah</div>
+                                        </td>
+                                        <td class="px-2.5 py-3 text-center text-amber-700 font-semibold bg-amber-50/20">12</td>
+                                        <td class="px-2.5 py-3 text-center text-orange-700 font-semibold bg-orange-50/20">6</td>
+                                        <td class="px-2.5 py-3 text-center bg-rose-50/30">
+                                            <span class="px-2 py-0.5 rounded-md bg-rose-100 text-rose-700 font-bold border border-rose-200">2</span>
+                                        </td>
+                                        <td class="px-3.5 py-3 text-right font-bold text-slate-900 font-sans">
+                                            20 <span class="text-[10px] font-normal text-slate-500">(17.4%)</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot class="bg-slate-50 font-bold text-slate-800 text-[11px] border-t-2 border-slate-200">
+                                    <tr>
+                                        <td class="px-3.5 py-2.5 text-left font-sans">Total Tunggakan Cabang</td>
+                                        <td class="px-2.5 py-2.5 text-center text-amber-700">56</td>
+                                        <td class="px-2.5 py-2.5 text-center text-orange-700">38</td>
+                                        <td class="px-2.5 py-2.5 text-center text-rose-700 font-black">21</td>
+                                        <td class="px-3.5 py-2.5 text-right text-blue-700 font-black font-sans">115 Customer</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                        <!-- UX Actionable Recommendation Card with Modern Border Gradient -->
+                        <div class="p-4 bg-gradient-to-r from-amber-50/90 via-orange-50/50 to-white rounded-xl border border-amber-200/90 text-slate-700 text-xs flex items-start space-x-3 shadow-2xs">
+                            <span class="w-7 h-7 rounded-lg bg-amber-500/20 text-amber-700 flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fas fa-bolt text-xs"></i>
+                            </span>
+                            <div class="space-y-1">
+                                <div class="font-bold text-slate-900 flex items-center gap-2">
+                                    Rekomendasi Tindakan Operasional Cabang
+                                    <span class="text-[10px] px-1.5 py-0.2 bg-amber-200 text-amber-900 font-semibold rounded">Prioritas Tinggi</span>
+                                </div>
+                                <p class="text-[11px] text-slate-600 leading-relaxed">
+                                    Prioritaskan penanganan langsung oleh tim frontline pada <strong class="text-rose-700 font-bold">12 pelanggan baru (&lt; 6 bulan)</strong> yang menunggak <strong class="text-rose-700 font-bold">&gt; 7 hari</strong> untuk mencegah eskalasi menjadi <em>Terminate Churn</em> permanen.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tabel Data Sebaran Area -->
+            <section class="bg-white rounded-xl border border-slate-200/90 shadow-sm overflow-hidden">
+                <div class="px-5 py-4 border-b border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-3 bg-slate-50/70">
+                    <div>
+                        <h2 class="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-2">
+                            <i class="fas fa-table text-blue-600"></i>Data Sebaran Area Pelanggan
+                            <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-blue-50 text-blue-700 border border-blue-200">Level Cabang / Kluster</span>
+                        </h2>
+                        <p class="text-[11px] text-slate-500 mt-0.5">Monitoring sebaran status pelanggan aktif, tunggakan isolir, churn terminate, dan titik fasum per sub-area.</p>
+                    </div>
+
+                    <!-- Toolbar Filter Tabel -->
+                    <div class="flex flex-wrap items-center gap-2">
+                        <!-- Pencarian Nama / Kode Area -->
+                        <div class="relative">
+                            <i class="fas fa-search absolute left-2.5 top-2.5 text-slate-400 text-[10px]"></i>
+                            <input id="table-search" type="text" placeholder="Cari nama / kode area..." class="bg-white text-slate-800 text-xs rounded-lg pl-7 pr-3 py-1.5 border border-slate-300 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 w-48 shadow-2xs">
+                        </div>
+
+                        <!-- Filter Kategori Area -->
+                        <select id="table-filter-kategori" class="bg-white text-slate-700 text-xs rounded-lg px-2.5 py-1.5 border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 shadow-2xs font-medium">
+                            <option value="all">Semua Kategori</option>
+                            <option value="Primary">Primary</option>
+                            <option value="Overlay">Overlay</option>
+                        </select>
+
+                        <!-- Filter Status Min/Ada Pelanggan -->
+                        <select id="table-filter-status" class="bg-white text-slate-700 text-xs rounded-lg px-2.5 py-1.5 border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 shadow-2xs font-medium">
+                            <option value="all">Semua Kondisi</option>
+                            <option value="has_isolir">Ada Isolir (> 0)</option>
+                            <option value="has_terminate">Ada Terminate (> 0)</option>
+                            <option value="has_fasum">Ada Fasum (> 0)</option>
+                        </select>
+
+                        <!-- Reset Filter Tabel -->
+                        <button id="table-btn-reset" class="bg-white hover:bg-slate-100 text-slate-600 text-xs px-2.5 py-1.5 rounded-lg border border-slate-300 shadow-2xs transition" title="Reset filter tabel">
+                            <i class="fas fa-undo-alt text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead class="bg-slate-100/80 text-slate-700 border-b border-slate-200 text-[11px]">
+                            <tr>
+                                <th class="px-4 py-3 font-semibold cursor-pointer hover:text-slate-900 transition-colors" onclick="sortTable(0)">nama_area <i class="fas fa-sort text-[9px] ml-1 text-slate-400"></i></th>
+                                <th class="px-4 py-3 font-semibold cursor-pointer hover:text-slate-900 transition-colors" onclick="sortTable(1)">kode_area <i class="fas fa-sort text-[9px] ml-1 text-slate-400"></i></th>
+                                <th class="px-4 py-3 font-semibold cursor-pointer hover:text-slate-900 transition-colors" onclick="sortTable(2)">Kategori Area <i class="fas fa-sort text-[9px] ml-1 text-slate-400"></i></th>
+                                <th class="px-4 py-3 font-semibold cursor-pointer hover:text-slate-900 transition-colors" onclick="sortTable(3)">open_area <i class="fas fa-sort text-[9px] ml-1 text-slate-400"></i></th>
+                                <th class="px-4 py-3 font-semibold text-right cursor-pointer hover:text-slate-900 transition-colors" onclick="sortTable(4, true)">Customer Aktif <i class="fas fa-sort text-[9px] ml-1 text-slate-400"></i></th>
+                                <th class="px-4 py-3 font-semibold text-right cursor-pointer hover:text-slate-900 transition-colors" onclick="sortTable(5, true)">Customer Isolir <i class="fas fa-sort text-[9px] ml-1 text-slate-400"></i></th>
+                                <th class="px-4 py-3 font-semibold text-right cursor-pointer hover:text-slate-900 transition-colors" onclick="sortTable(6, true)">Customer Terminate <i class="fas fa-sort text-[9px] ml-1 text-slate-400"></i></th>
+                                <th class="px-4 py-3 font-semibold text-right cursor-pointer hover:text-slate-900 transition-colors" onclick="sortTable(7, true)">Only Fasum <i class="fas fa-sort text-[9px] ml-1 text-slate-400"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody id="area-table-body" class="divide-y divide-slate-200/70 bg-white font-mono text-[11px]">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="px-5 py-3 bg-slate-50/80 border-t border-slate-200 text-[11px] text-slate-500 flex justify-between items-center">
+                    <span>Menampilkan <strong id="table-count" class="text-slate-800 font-bold">10</strong> area</span>
+                    <span class="text-[10px] text-slate-400 flex items-center gap-1">
+                        <i class="fas fa-info-circle"></i> Klik judul header untuk mengurutkan data (sort A-Z / 0-9)
+                    </span>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Script Chart & Interaktivitas Filter -->
+    <script>
+        // ponytail: client-side mock data store per branch. upgrade to REST API fetch when backend ready.
+        const branchDataset = {
+            temas: {
+                name: "Temas",
+                total: 1250,
+                active: 1025,
+                isolir: 115,
+                fasum: 45,
+                terminate: 65,
+                paket: {
+                    labels: ['Lite', '7 Mbps', '10 Mbps', '15 Mbps', '30 Mbps', '50 Mbps', '100 Mbps'],
+                    data: [130, 210, 390, 260, 140, 80, 40]
+                },
+                subArea: {
+                    labels: ['Klojen', 'Lowokwaru', 'Blimbing', 'Sukun', 'Kedungkandang'],
+                    active: [240, 310, 215, 150, 110],
+                    isolir: [20, 25, 30, 22, 18]
+                },
+                isolirSeverity: {
+                    labels: ['H+1 s/d H+3 (Ringan)', 'H+4 s/d H+7 (Sedang)', '> H+7 (Kritis/Churn)'],
+                    baru: [24, 18, 12],
+                    menengah: [20, 14, 7],
+                    loyal: [12, 6, 2]
+                }
+            },
+            kepanjen: {
+                name: "Kepanjen",
+                total: 820,
+                active: 660,
+                isolir: 85,
+                fasum: 25,
+                terminate: 50,
+                paket: {
+                    labels: ['Lite', '7 Mbps', '10 Mbps', '15 Mbps', '30 Mbps', '50 Mbps', '100 Mbps'],
+                    data: [110, 190, 280, 140, 60, 25, 15]
+                },
+                subArea: {
+                    labels: ['Kepanjen Kota', 'Talangagung', 'Curungrejo', 'Mangunrejo', 'Kedungpedaringan'],
+                    active: [210, 140, 120, 100, 90],
+                    isolir: [25, 20, 18, 12, 10]
+                },
+                isolirSeverity: {
+                    labels: ['H+1 s/d H+3 (Ringan)', 'H+4 s/d H+7 (Sedang)', '> H+7 (Kritis/Churn)'],
+                    baru: [18, 15, 10],
+                    menengah: [15, 10, 6],
+                    loyal: [7, 3, 1]
+                }
+            },
+            batu: {
+                name: "Batu",
+                total: 960,
+                active: 810,
+                isolir: 70,
+                fasum: 30,
+                terminate: 50,
+                paket: {
+                    labels: ['Lite', '7 Mbps', '10 Mbps', '15 Mbps', '30 Mbps', '50 Mbps', '100 Mbps'],
+                    data: [80, 120, 300, 230, 130, 60, 40]
+                },
+                subArea: {
+                    labels: ['Batu Kota', 'Bumiaji', 'Junrejo', 'Sisir', 'Oro-oro Ombo'],
+                    active: [250, 180, 160, 120, 100],
+                    isolir: [18, 16, 14, 12, 10]
+                },
+                isolirSeverity: {
+                    labels: ['H+1 s/d H+3 (Ringan)', 'H+4 s/d H+7 (Sedang)', '> H+7 (Kritis/Churn)'],
+                    baru: [15, 12, 8],
+                    menengah: [12, 8, 4],
+                    loyal: [8, 2, 1]
+                }
+            },
+            singosari: {
+                name: "Singosari",
+                total: 740,
+                active: 590,
+                isolir: 75,
+                fasum: 20,
+                terminate: 55,
+                paket: {
+                    labels: ['Lite', '7 Mbps', '10 Mbps', '15 Mbps', '30 Mbps', '50 Mbps', '100 Mbps'],
+                    data: [95, 150, 240, 145, 65, 30, 15]
+                },
+                subArea: {
+                    labels: ['Candirenggo', 'Pagentan', 'Losari', 'Klampok', 'Ardimulyo'],
+                    active: [170, 140, 110, 95, 75],
+                    isolir: [22, 18, 14, 12, 9]
+                },
+                isolirSeverity: {
+                    labels: ['H+1 s/d H+3 (Ringan)', 'H+4 s/d H+7 (Sedang)', '> H+7 (Kritis/Churn)'],
+                    baru: [16, 14, 9],
+                    menengah: [13, 9, 5],
+                    loyal: [6, 2, 1]
+                }
+            }
+        };
+
+        let donutStatusChart, barPaketChart, lateTenureChart;
+
+        function updateKpis(data) {
+            const activePct = ((data.active / data.total) * 100).toFixed(1);
+            const isolirPct = ((data.isolir / data.total) * 100).toFixed(1);
+            const fasumPct = ((data.fasum / data.total) * 100).toFixed(1);
+            const terminatePct = ((data.terminate / data.total) * 100).toFixed(1);
+
+            document.getElementById('kpi-active').textContent = data.active.toLocaleString();
+            document.getElementById('kpi-active-pct').textContent = `${activePct}%`;
+            document.getElementById('kpi-isolir').textContent = data.isolir.toLocaleString();
+            document.getElementById('kpi-isolir-pct').textContent = `${isolirPct}%`;
+            document.getElementById('kpi-fasum').textContent = data.fasum.toLocaleString();
+            document.getElementById('kpi-fasum-pct').textContent = `${fasumPct}%`;
+            document.getElementById('kpi-terminate').textContent = data.terminate.toLocaleString();
+            document.getElementById('kpi-terminate-pct').textContent = `${terminatePct}%`;
+            document.getElementById('label-cabang-aktif').textContent = data.name;
+        }
+
+        function initCharts(data) {
+            // A. Donut Chart
+            const ctxDonut = document.getElementById('chartDonutStatus').getContext('2d');
+            donutStatusChart = new Chart(ctxDonut, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Active', 'Isolir', 'Fasum', 'Terminate'],
+                    datasets: [{
+                        data: [data.active, data.isolir, data.fasum, data.terminate],
+                        backgroundColor: ['#10b981', '#f59e0b', '#3b82f6', '#f43f5e'],
+                        borderWidth: 2,
+                        borderColor: '#ffffff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const val = context.raw;
+                                    const pct = ((val / total) * 100).toFixed(1);
+                                    return ` ${context.label}: ${val} unit (${pct}%)`;
+                                }
+                            }
+                        }
+                    },
+                    cutout: '62%'
+                }
+            });
+
+            // B. Bar Paket
+            const ctxPaket = document.getElementById('chartBarPaket').getContext('2d');
+            barPaketChart = new Chart(ctxPaket, {
+                type: 'bar',
+                data: {
+                    labels: data.paket.labels,
+                    datasets: [{
+                        label: 'Jumlah Pelanggan',
+                        data: data.paket.data,
+                        backgroundColor: '#3b82f6',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: ctx => ` ${ctx.raw} pelanggan`
+                            }
+                        }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: '#f1f5f9' }, ticks: { font: { size: 10 } } },
+                        x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+                    }
+                }
+            });
+
+            // C. Bar Chart: Lama Subscribe vs Telat Pembayaran
+            const ctxLate = document.getElementById('chartLateByTenure').getContext('2d');
+            lateTenureChart = new Chart(ctxLate, {
+                type: 'bar',
+                data: {
+                    labels: ['< 6 Bulan (Baru)', '6 - 12 Bulan (Menengah)', '> 12 Bulan (Loyal)'],
+                    datasets: [
+                        {
+                            label: '1 - 3 Hari (Reminder)',
+                            data: [24, 20, 12],
+                            backgroundColor: '#fbbf24',
+                            borderRadius: 4
+                        },
+                        {
+                            label: '4 - 7 Hari (Warning)',
+                            data: [18, 14, 6],
+                            backgroundColor: '#fb923c',
+                            borderRadius: 4
+                        },
+                        {
+                            label: '> 7 Hari (Kritis)',
+                            data: [12, 7, 2],
+                            backgroundColor: '#f43f5e',
+                            borderRadius: 4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } },
+                        tooltip: {
+                            callbacks: {
+                                label: ctx => ` ${ctx.dataset.label}: ${ctx.raw} customer`
+                            }
+                        }
+                    },
+                    scales: {
+                        x: { stacked: true, grid: { display: false }, ticks: { font: { size: 10 } } },
+                        y: { stacked: true, beginAtZero: true, grid: { color: '#f1f5f9' }, ticks: { font: { size: 10 } } }
+                    }
+                }
+            });
+        }
+
+        function renderDashboard() {
+            const branch = branchDataset.temas;
+
+            updateKpis(branch);
+
+            donutStatusChart.data.datasets[0].data = [branch.active, branch.isolir, branch.fasum, branch.terminate];
+            donutStatusChart.update();
+
+            barPaketChart.data.labels = branch.paket.labels;
+            barPaketChart.data.datasets[0].data = branch.paket.data;
+            barPaketChart.update();
+        }
+
+        // Dynamic Period Filter Category Switch
+        const modeDurasiSelect = document.getElementById('filter-mode-durasi');
+        const pickerSegmen = document.getElementById('picker-segmen');
+        const pickerBulan = document.getElementById('picker-bulan');
+        const pickerRentang = document.getElementById('picker-rentang');
+
+        modeDurasiSelect.addEventListener('change', (e) => {
+            const val = e.target.value;
+            pickerSegmen.classList.add('hidden');
+            pickerBulan.classList.add('hidden');
+            pickerRentang.classList.add('hidden');
+
+            if (val === 'segmen') pickerSegmen.classList.remove('hidden');
+            else if (val === 'bulan') pickerBulan.classList.remove('hidden');
+            else if (val === 'rentang') pickerRentang.classList.remove('hidden');
+        });
+
+        document.getElementById('btn-reset').addEventListener('click', () => {
+            document.getElementById('filter-paket').value = 'all';
+            modeDurasiSelect.value = 'segmen';
+            pickerSegmen.classList.remove('hidden');
+            pickerBulan.classList.add('hidden');
+            pickerRentang.classList.add('hidden');
+            document.getElementById('filter-durasi').value = 'all';
+            document.getElementById('filter-bulan').value = '2026-03';
+            document.getElementById('filter-date-start').value = '2026-01-01';
+            document.getElementById('filter-date-end').value = '2026-03-31';
+            renderDashboard();
+        });
+
+        document.getElementById('btn-cetak').addEventListener('click', () => {
+            window.print();
+        });
+
+        // Quick Filter View for Tenure Late Chart
+        function filterTenureView(mode) {
+            const btnAll = document.getElementById('btn-tenure-all');
+            const btnWarn = document.getElementById('btn-tenure-warning');
+            const btnKritis = document.getElementById('btn-tenure-kritis');
+
+            [btnAll, btnWarn, btnKritis].forEach(b => {
+                b.className = "px-2.5 py-1 rounded font-medium text-slate-600 hover:text-slate-900 transition";
+            });
+
+            if (mode === 'all') {
+                btnAll.className = "px-2.5 py-1 rounded font-medium bg-white text-slate-800 shadow-xs transition";
+                lateTenureChart.data.datasets[0].hidden = false;
+                lateTenureChart.data.datasets[1].hidden = false;
+                lateTenureChart.data.datasets[2].hidden = false;
+            } else if (mode === 'warning') {
+                btnWarn.className = "px-2.5 py-1 rounded font-medium bg-white text-orange-700 shadow-xs transition";
+                lateTenureChart.data.datasets[0].hidden = true;
+                lateTenureChart.data.datasets[1].hidden = false;
+                lateTenureChart.data.datasets[2].hidden = true;
+            } else if (mode === 'kritis') {
+                btnKritis.className = "px-2.5 py-1 rounded font-medium bg-white text-rose-700 shadow-xs transition";
+                lateTenureChart.data.datasets[0].hidden = true;
+                lateTenureChart.data.datasets[1].hidden = true;
+                lateTenureChart.data.datasets[2].hidden = false;
+            }
+            lateTenureChart.update();
+        }
+
+        // Data Area Table
+        const areaTableData = [
+            { nama: 'Abdul Gani - 2', kode: 'GANI - 2', kategori: 'Overlay', open: '2026-02-18 00:00:00', aktif: 34, isolir: 0, terminate: 1, fasum: 0 },
+            { nama: 'Abdul Gani', kode: 'GANI', kategori: 'Primary', open: '2024-07-01 00:00:00', aktif: 116, isolir: 3, terminate: 26, fasum: 2 },
+            { nama: 'AGROWISATA', kode: 'AGRO', kategori: 'Primary', open: '2026-05-01 00:00:00', aktif: 16, isolir: 0, terminate: 0, fasum: 3 },
+            { nama: 'Alun-alun KWB - 2', kode: 'ALUN - 2', kategori: 'Overlay', open: '2026-03-08 00:00:00', aktif: 51, isolir: 2, terminate: 0, fasum: 0 },
+            { nama: 'Alun-alun KWB', kode: 'ALUN', kategori: 'Primary', open: '2024-05-01 00:00:00', aktif: 107, isolir: 2, terminate: 27, fasum: 1 },
+            { nama: 'BATOS - 2', kode: 'BTOS - 2', kategori: 'Overlay', open: '2026-03-31 00:00:00', aktif: 20, isolir: 1, terminate: 0, fasum: 0 },
+            { nama: 'BATOS', kode: 'BTOS', kategori: 'Primary', open: '2023-10-01 00:00:00', aktif: 108, isolir: 1, terminate: 34, fasum: 6 },
+            { nama: 'Batu Night Spectaculer - 2', kode: 'BANS - 2', kategori: 'Overlay', open: '2025-09-09 00:00:00', aktif: 88, isolir: 3, terminate: 13, fasum: 1 },
+            { nama: 'Batu Night Spectaculer', kode: 'BANS', kategori: 'Primary', open: '2024-01-01 00:00:00', aktif: 112, isolir: 4, terminate: 48, fasum: 1 },
+            { nama: 'Beji Sawahan - 2', kode: 'SAWA - 2', kategori: 'Overlay', open: '2026-05-07 00:00:00', aktif: 12, isolir: 0, terminate: 0, fasum: 0 },
+            { nama: 'Beji Sawahan', kode: 'SAWA', kategori: 'Primary', open: '2024-03-01 00:00:00', aktif: 91, isolir: 3, terminate: 27, fasum: 4 }
+        ];
+
+        let currentSort = { col: null, asc: true };
+
+        function renderAreaTable() {
+            const searchVal = document.getElementById('table-search').value.toLowerCase().trim();
+            const kategoriVal = document.getElementById('table-filter-kategori').value;
+            const statusVal = document.getElementById('table-filter-status').value;
+
+            let filtered = areaTableData.filter(row => {
+                const matchSearch = row.nama.toLowerCase().includes(searchVal) || row.kode.toLowerCase().includes(searchVal);
+                const matchKategori = (kategoriVal === 'all') || (row.kategori === kategoriVal);
+                let matchStatus = true;
+                if (statusVal === 'has_isolir') matchStatus = row.isolir > 0;
+                else if (statusVal === 'has_terminate') matchStatus = row.terminate > 0;
+                else if (statusVal === 'has_fasum') matchStatus = row.fasum > 0;
+                return matchSearch && matchKategori && matchStatus;
+            });
+
+            if (currentSort.col !== null) {
+                const { col, isNum, asc } = currentSort;
+                const fields = ['nama', 'kode', 'kategori', 'open', 'aktif', 'isolir', 'terminate', 'fasum'];
+                const key = fields[col];
+                filtered.sort((a, b) => {
+                    let va = a[key];
+                    let vb = b[key];
+                    if (isNum) return asc ? va - vb : vb - va;
+                    return asc ? String(va).localeCompare(String(vb)) : String(vb).localeCompare(String(va));
+                });
+            }
+
+            const tbody = document.getElementById('area-table-body');
+            document.getElementById('table-count').textContent = filtered.length;
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" class="text-center py-6 text-slate-500 font-sans text-xs">Tidak ada area yang cocok dengan filter.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = filtered.map(row => `
+                <tr class="hover:bg-slate-50/80 transition-colors">
+                    <td class="px-4 py-3 font-sans font-medium text-slate-800">${row.nama}</td>
+                    <td class="px-4 py-3 text-slate-600 font-semibold">${row.kode}</td>
+                    <td class="px-4 py-3 font-sans">
+                        <span class="px-2 py-0.5 rounded text-[10px] font-semibold ${row.kategori === 'Primary' ? 'bg-blue-50 text-blue-700 border border-blue-200' : 'bg-slate-100 text-slate-600 border border-slate-200'}">
+                            ${row.kategori}
+                        </span>
+                    </td>
+                    <td class="px-4 py-3 text-slate-500">${row.open}</td>
+                    <td class="px-4 py-3 text-right font-bold text-emerald-600">${row.aktif}</td>
+                    <td class="px-4 py-3 text-right font-semibold ${row.isolir > 0 ? 'text-amber-600' : 'text-slate-400'}">${row.isolir}</td>
+                    <td class="px-4 py-3 text-right font-semibold ${row.terminate > 0 ? 'text-rose-600' : 'text-slate-400'}">${row.terminate}</td>
+                    <td class="px-4 py-3 text-right font-semibold ${row.fasum > 0 ? 'text-blue-600' : 'text-slate-400'}">${row.fasum}</td>
+                </tr>
+            `).join('');
+        }
+
+        function sortTable(colIndex, isNum = false) {
+            if (currentSort.col === colIndex) {
+                currentSort.asc = !currentSort.asc;
+            } else {
+                currentSort = { col: colIndex, isNum, asc: true };
+            }
+            renderAreaTable();
+        }
+
+        document.getElementById('table-search').addEventListener('input', renderAreaTable);
+        document.getElementById('table-filter-kategori').addEventListener('change', renderAreaTable);
+        document.getElementById('table-filter-status').addEventListener('change', renderAreaTable);
+        document.getElementById('table-btn-reset').addEventListener('click', () => {
+            document.getElementById('table-search').value = '';
+            document.getElementById('table-filter-kategori').value = 'all';
+            document.getElementById('table-filter-status').value = 'all';
+            currentSort = { col: null, asc: true };
+            renderAreaTable();
+        });
+
+        // Initialize on load
+        const initialData = branchDataset.temas;
+        updateKpis(initialData);
+        initCharts(initialData);
+        renderAreaTable();
+    </script>
+</body>
+</html>
